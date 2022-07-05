@@ -1,58 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import './App.scss';
+import { withAuth } from './app/hoc/withAuth';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './app/routes/AppRoutes';
+import { useAppDispatch } from './app/hook/store.hook';
+import { login, logout } from './app/store/auth/authSlice';
 
-function App() {
+const AppComponent = () => {
+
+  const dispatch = useAppDispatch();
+  const click1 = () => {
+    dispatch(login({ login: 'stu002', password: 'stu002' }))
+  }
+  const click2 = () => {
+    dispatch(logout());
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <Router>
+        <AppRoutes />
+        <button onClick={click1}>LOGIN</button>
+        <button onClick={click2}>LOGOUT</button>
+      </Router>
     </div>
   );
 }
 
+const App = withAuth(AppComponent);
 export default App;
