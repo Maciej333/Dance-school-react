@@ -13,3 +13,43 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  label,
+  input,
+  select,
+  .error,
+  .main-error {
+    width: 100%;
+  }
+
+  label {
+    text-align: left;
+    margin: 10px 0 5px;
+
+    span {
+      color: red;
+      margin-right: 5px;
+    }
+  }
+
+  button {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+
+  .error,
+  .main-error {
+    color: red;
+  }
+
+  .error {
+    text-align: left;
+    margin-left: 20px;
+  }
+}

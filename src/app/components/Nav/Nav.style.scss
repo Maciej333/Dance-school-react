@@ -1,0 +1,19 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 50px;
+
+    a {
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        &:hover,
+        &.active {
+            border-bottom: 2px solid black;
+        }
+    }
+
+    .links {}
+}

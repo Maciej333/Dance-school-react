@@ -1,5 +1,9 @@
-export type AuthState = {
+import { User } from "./user.model"
 
+export type AuthState = {
+    user: User,
+    loading: boolean,
+    error: string
 }
 
 export type AuthLogin = {
