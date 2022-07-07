@@ -93,8 +93,10 @@ $breakWidth: 800px;
             justify-content: space-between;
             align-items: center;
             background-color: transparent;
-            padding: 20px;
+            padding: 25px;
+            margin: 0 auto;
             min-height: 0;
+            max-width: 1400px;
             border-left: none;
 
             &.right {

@@ -1,5 +1,16 @@
+@import '../../../app/assets/color.style.scss';
+
 .top {
+    position: relative;
     height: 100vh;
     background-position: center center;
     background-size: cover;
+
+    svg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        fill: $basic-color-3;
+    }
 }
