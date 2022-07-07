@@ -35,12 +35,14 @@
             position: absolute;
             top: 40px;
             padding: 5px;
-            background-color: $basic-color-3;
-            border-left: 1px solid $basic-color-3-active;
-            border-right: 1px solid $basic-color-3-active;
+            background-color: $basic-color-2;
 
             a {
                 white-space: nowrap;
+
+                &:hover {
+                    background-color: $basic-color;
+                }
             }
         }
     }
