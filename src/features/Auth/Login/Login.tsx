@@ -74,7 +74,7 @@ export default function Login() {
             <span className='error'>{formData.login.error}</span>
 
             <label htmlFor='password'><span>*</span>Password</label>
-            <input id='password' name='password' value={formData.password.value} onChange={handleChange}></input>
+            <input id='password' name='password' type="password" value={formData.password.value} onChange={handleChange}></input>
             <span className='error'>{formData.password.error}</span>
 
             <button type='submit'>Submit</button>

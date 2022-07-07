@@ -39,9 +39,11 @@
 
             a {
                 white-space: nowrap;
+                border-bottom: none;
 
                 &:hover {
                     background-color: $basic-color;
+                    border-bottom: none;
                 }
             }
         }

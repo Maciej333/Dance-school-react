@@ -72,6 +72,6 @@ export default function Nav() {
                 </div>
                 <User />
             </div>
-        </nav>
+        </nav >
     )
 }

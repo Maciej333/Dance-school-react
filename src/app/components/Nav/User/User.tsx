@@ -18,7 +18,7 @@ export default function User() {
             {
                 user.user.id >= 0 ?
                     <>
-                        <NavLink to="/" className="profile">
+                        <NavLink to="/profile" className="profile">
                             <span>{user.user.firstname}</span>
                             <span>{user.user.lastname}</span>
                         </NavLink>

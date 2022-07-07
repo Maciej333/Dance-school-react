@@ -15,12 +15,13 @@
             align-items: center;
             gap: 10px;
             padding: 5px;
+            border-bottom: none;
+
+            &:hover {
+                border-bottom: none;
+            }
         }
 
-        &:hover {
-            color: $basic-color-2  !important;
-            background-color: transparent !important;
-        }
     }
 
     button {
