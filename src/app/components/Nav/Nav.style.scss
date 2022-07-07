@@ -1,19 +1,105 @@
+@import '../../assets/color.style.scss';
+
+$menuLinksPaddingTop: 80px;
+$breakWidth: 800px;
+
 .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 50px;
+    position: relative;
 
-    a {
-        text-align: center;
-        text-decoration: none;
-        text-transform: uppercase;
+    .menu-btn {
+        z-index: 11;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 40px;
 
-        &:hover,
-        &.active {
-            border-bottom: 2px solid black;
+        &:hover {
+            cursor: pointer;
+            font-weight: 600;
         }
     }
 
-    .links {}
+    .menu-links {
+        position: fixed;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        gap: 20px;
+        padding-top: $menuLinksPaddingTop;
+        border-left: 2px solid $basic-color;
+        background-color: $basic-color-3;
+        min-height: calc(100vh - $menuLinksPaddingTop);
+        min-width: 120px;
+        transition: 0.3s all ease-out;
+
+        &.right {
+            right: -$breakWidth;
+        }
+
+        &.show {
+            right: 0px;
+        }
+
+        a,
+        .link {
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: $basic-color;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 5px 0;
+            margin: 0 10px;
+            border-radius: 2px;
+            transition: 0.5s all linear;
+
+            &:hover,
+            &.active {
+                color: $basic-color-3;
+                background-color: $basic-color-2;
+            }
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+    }
+}
+
+@media screen and (min-width: $breakWidth) {
+    .nav {
+
+        .menu-btn {
+            display: none;
+        }
+
+        .menu-links {
+            position: relative;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            min-height: 0;
+            border-left: none;
+
+            &.right {
+                right: 0;
+            }
+
+            a {
+                margin: 0;
+                padding: 5px 10px;
+            }
+
+            .links {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+        }
+    }
+
 }

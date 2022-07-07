@@ -1,3 +1,39 @@
+@import '../../../assets/color.style.scss';
+
 .user {
-    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid $basic-color;
+
+    a {
+        &.profile {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 5px;
+        }
+
+        &:hover {
+            color: $basic-color-2  !important;
+            background-color: transparent !important;
+        }
+    }
+
+    button {
+        align-self: flex-end;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .user {
+        flex-direction: row;
+        gap: 5px;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
 }

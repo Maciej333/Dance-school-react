@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom';
-import Login from '../components/Login/Login';
+import Home from '../../features/Home/Home';
+import Loading from '../components/Loading/Loading';
+
+const Auth = lazy(() => import("../../features/Auth/Auth"));
+const Login = lazy(() => import("../../features/Auth/Login/Login"));
 
 export default function AppRoutes() {
     return (
         <Routes>
-            <Route path='' element={<h1>Hello</h1>} />
+            <Route path="/" element={<Home />} />
 
-            <Route path="/login" element={<Login />} />
+            <Route path="/auth/*" element={<Suspense fallback={<Loading />}><Auth /></Suspense>}>
+                <Route path="login" element={<Suspense fallback={<>...</>}><Login /></Suspense>} />
+            </Route>
 
             <Route path="*" element={<>not found</>} />
         </Routes>

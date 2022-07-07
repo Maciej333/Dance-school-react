@@ -1,6 +1,3 @@
-export const UserRole = [
-    "DIRECTOR",
-    "RECEPCJONIST",
-    "INSTRUCTOR",
-    "STUDENT"
-]
+export enum UserRole {
+    DIRECTOR, RECEPCJONIST, INSTRUCTOR, STUDENT
+}

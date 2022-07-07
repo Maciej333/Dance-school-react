@@ -17,14 +17,15 @@ export default function User() {
         <div className='user'>
             {
                 user.user.id >= 0 ?
-                    <div>
-                        <p>{user.user.id}</p>
-                        <p>{user.user.firstname}</p>
-                        <p>{user.user.lastname}</p>
-                        <button onClick={handleLogout}>LOGOUT</button>
-                    </div>
+                    <>
+                        <NavLink to="/" className="profile">
+                            <span>{user.user.firstname}</span>
+                            <span>{user.user.lastname}</span>
+                        </NavLink>
+                        <button className='btn' onClick={handleLogout}>LOGOUT</button>
+                    </>
                     :
-                    <NavLink to="login">login</NavLink>
+                    <NavLink to="/auth/login">login</NavLink>
 
             }
         </div>

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import './Login.style.scss';
-import { useAppDispatch, useAppSelector } from '../../hook/store.hook';
-import { login, selectAuth } from '../../store/auth/authSlice';
-import { notEmpty, stringLength, validate, validator } from '../../utils/validators/validators';
+import { useAppDispatch, useAppSelector } from '../../../app/hook/store.hook';
+import { login, selectAuth } from '../../../app/store/auth/authSlice';
+import { notEmpty, stringLength, validate, validator } from '../../../app/utils/validators/validators';
 
 export default function Login() {
 
