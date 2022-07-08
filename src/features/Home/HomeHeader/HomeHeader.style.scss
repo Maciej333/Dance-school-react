@@ -1,0 +1,50 @@
+@import '../../../app/assets/color.style.scss';
+
+$dimension: 160px;
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    .line {
+        content: "";
+        background: $background-color;
+        height: 5px;
+        width: 50%;
+
+        &.line-left {
+            border-radius: 100% 0 0 100%;
+        }
+
+        &.line-right {
+            border-radius: 0 100% 100% 0;
+        }
+    }
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: $dimension;
+        width: $dimension;
+        height: $dimension;
+        padding: 10px;
+        margin: 0 auto;
+        background: $background-color;
+        background-clip: padding-box;
+        border-radius: 50%;
+        border: 20px solid transparent;
+        outline: 5px solid $basic-color-5;
+
+        h2 {
+            color: $basic-color;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+    }
+}

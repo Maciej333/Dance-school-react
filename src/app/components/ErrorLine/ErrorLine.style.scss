@@ -1,0 +1,9 @@
+@import '../../assets/color.style.scss';
+
+.msg-error {
+    color: $error-color;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin: 40px auto;
+}
