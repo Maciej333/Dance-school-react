@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getDanceStyles } from '../../../app/api/danceStyle.api';
+import CardCarousel from '../../../app/components/CardCarousel/CardCarousel';
 import { withApi } from '../../../app/hoc/withApi';
 import { DanceStyle } from '../../../app/model/danceStyle.model';
 import './DanceStyles.style.scss';
@@ -11,17 +12,16 @@ const DanceStylesComponent = (props: { apiData?: any }) => {
 
   useEffect(() => {
     if (props.apiData) {
-      setDanceStyles(props.apiData)
+      setDanceStyles(props.apiData);
     }
   }, [props])
 
   return (
     <div className='dance-styles'>
-      {
-        danceStyles.map((ds, id) => {
-          return <StyleCard key={`[style card]=${id}`} />
-        })
-      }
+      <CardCarousel
+        cards={danceStyles}
+        cardComponent={StyleCard}
+      />
     </div>
   )
 }

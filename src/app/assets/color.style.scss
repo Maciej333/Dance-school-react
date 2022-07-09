@@ -11,7 +11,8 @@ $basic-color-5: #F7CE68;
 
 $background-color-fixed-black: linear-gradient(to left, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.35));
 $background-color-fixed-white: linear-gradient(to left, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.25));
-$background-color: linear-gradient(62deg, #EC994B 0%, #F7CE68 100%);
+$background-color: linear-gradient(62deg, $basic-color-4 0%, $basic-color-5 100%);
+$background-color-white: linear-gradient(62deg, $basic-color-3 0%, $basic-color-3-active 100%);
 
 $error-color: #ff0000;
 $error-color-active: #d10707;
