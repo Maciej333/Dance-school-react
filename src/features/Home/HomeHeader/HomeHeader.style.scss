@@ -21,7 +21,8 @@ $dimension: 160px;
         }
 
         &.line-right {
-            border-radius: 0 100% 100% 0;
+            border-radius: 100% 0 0 100%;
+            transform: rotate(180deg);
         }
     }
 

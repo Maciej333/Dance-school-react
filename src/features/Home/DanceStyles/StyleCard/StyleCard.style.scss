@@ -1,17 +1,15 @@
 @import '../../../../app/assets/color.style.scss';
 
 .style-card {
+    position: relative;
     min-width: 100%;
     min-height: 100%;
     padding: 10px;
-
     color: $basic-color-3;
     background: $background-color-black;
     box-shadow: 8px 8px 30px -20px #fff;
-    border: 1px solid $basic-color-3;
+    border: 1px solid $basic-color-5;
     border-radius: 25px;
-
-
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -33,5 +31,15 @@
     .description {
         max-height: 200px;
         overflow-y: auto;
+    }
+
+    .shadow {
+        position: absolute;
+        top: 10;
+        left: 10px;
+        width: 100px;
+        height: calc(100% - 20px);
+        background: $background-color-fixed-white;
+        border-radius: 20px;
     }
 }

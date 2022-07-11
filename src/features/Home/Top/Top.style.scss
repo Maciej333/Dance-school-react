@@ -1,16 +1,52 @@
 @import '../../../app/assets/color.style.scss';
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner&display=swap');
 
 .top {
     position: relative;
-    // height: 100vh;
-    height: 400px;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    // svg {
-    //     position: absolute;
-    //     bottom: 0;
-    //     left: 0;
-    //     width: 100%;
-    //     // fill: $basic-color-4;
-    //     stroke: $basic-color-4;
-    // }
+    .main-header {
+        width: 86vw;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        font-family: 'Edu SA Beginner', cursive;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        transform: rotate(-2deg);
+
+        p {
+            color: $basic-color-3;
+            margin: 0;
+
+            span {
+                color: $basic-color-5;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .top {
+        .main-header {
+            font-size: 3rem;
+        }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .top {
+        .main-header {
+            font-size: 4rem;
+        }
+    }
 }

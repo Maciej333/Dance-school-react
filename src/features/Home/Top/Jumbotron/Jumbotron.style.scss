@@ -1,0 +1,63 @@
+@import '../../../../app/assets/color.style.scss';
+
+.jumbotron {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    width: 70vw;
+    max-width: 300px;
+    min-height: 150px;
+    max-height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: $background-color;
+    box-shadow: 10px 0px 25px 10px #555;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: 0.5s all ease-out;
+
+    .news {
+        width: calc(100% - 40px);
+        padding: 20px;
+        color: $basic-color;
+        text-align: left;
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    .content {
+        padding: 20px 15px 30px;
+        border-radius: 20px 0 0 0;
+        text-align: justify;
+        font-weight: 600;
+        overflow-y: auto;
+        background-color: $basic-color-3;
+    }
+
+    &:hover {
+        box-shadow: 5px 0px 20px 5px $basic-color-5;
+        outline: 1px solid $basic-color;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .jumbotron {
+        right: 20vw;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .jumbotron {
+        right: 30vw;
+    }
+}
+
+@media screen and (min-height: 700px) {
+    .jumbotron {
+        bottom: 20px;
+        max-height: 200px;
+    }
+}
