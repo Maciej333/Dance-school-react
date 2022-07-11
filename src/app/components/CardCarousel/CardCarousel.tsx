@@ -74,8 +74,21 @@ export default function CardCarousel(props: { cards: any[], cardComponent: React
                     })
                 }
             </div>
-            <button onClick={handleLeft}>LEFT</button>
-            <button onClick={handleRight}>RIGHT</button>
+            <div className='buttons'>
+                <svg viewBox="0 0 80 60" onClick={handleLeft} className="triangle">
+                    <polygon points="0,30 80,0 80,60" />
+                </svg>
+                <div className='dots'>
+                    {
+                        (Array(max + 1).fill(1)).map((el, id) => {
+                            return <div key={`[dot] = ${id}`} className={`dot ${id === position ? 'active' : ''}`}>{""}</div>
+                        })
+                    }
+                </div>
+                <svg viewBox="0 0 80 60" onClick={handleRight} className="triangle">
+                    <polygon points="80,30 0,0 0,60" />
+                </svg>
+            </div>
         </div>
 
     )

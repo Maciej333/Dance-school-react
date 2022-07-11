@@ -1,6 +1,10 @@
+@import '../../assets/color.style.scss';
+
 .card-carousel {
     position: relative;
-    width: 600px;
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 1200px;
     height: 600px;
     margin: 0 auto;
     display: flex;
@@ -12,9 +16,50 @@
     .card-div {
         position: absolute;
         min-width: 150px;
+        max-width: 80vw;
         min-height: 400px;
-        background-color: rebeccapurple;
-        border: 2px solid red;
         transition: 1s all linear;
+    }
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    .triangle {
+        fill: $basic-color-3;
+        width: 30px;
+        height: 15px;
+        transition: 0.5s all ease-out;
+
+        &:hover {
+            fill: $basic-color-4;
+        }
+    }
+
+    .dots {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        max-width: calc(100vw - (2* 40px));
+
+        .dot {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: $basic-color-3-active;
+            transition: 0.5s all ease-out;
+
+            &.active {
+                transform: scale(1.2);
+                background-color: $basic-color-4;
+            }
+        }
     }
 }

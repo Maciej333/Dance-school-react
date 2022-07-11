@@ -11,7 +11,7 @@ export default function Home() {
         <div
             className='home'
             style={{
-                backgroundImage: `linear-gradient(-15deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.90)), url("/images/home.jpg")`
+                backgroundImage: `linear-gradient(-15deg, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.80)), url("/images/home.jpg")`
             }}
         >
 
