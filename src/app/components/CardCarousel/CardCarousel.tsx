@@ -66,7 +66,7 @@ export default function CardCarousel(props: { cards: any[], cardComponent: React
 
                         return <div
                             key={`[card]=${id}`}
-                            style={{ transform: card }}
+                            style={{ transform: card, zIndex: id === position ? "11" : "" }}
                             className="card-div"
                         >
                             <props.cardComponent element={element} />

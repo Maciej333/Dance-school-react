@@ -6,7 +6,9 @@ export default function StyleCard(props: { element: DanceStyle }) {
     const { element } = props;
     return (
         <div className='style-card'>
-            <h3>{element.name}</h3>
+            <h3 className='name'>{element.name}</h3>
+            <p className='country'>{element.countryOfOrigin}</p>
+            <div className='description'>{element.description}</div>
         </div>
     )
 }
