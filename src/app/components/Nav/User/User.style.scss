@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 10px;
     padding-bottom: 15px;
-    border-bottom: 2px solid $basic-color;
+    border-bottom: 2px solid $basic-color-3;
 
     a {
         &.profile {
@@ -21,7 +21,6 @@
                 border-bottom: none;
             }
         }
-
     }
 
     button {

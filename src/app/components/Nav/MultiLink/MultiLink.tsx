@@ -18,7 +18,7 @@ export default function MultiLink(props: { name: string, links: JSX.Element[] })
 
     return (
         <div className='multi-link' onClick={closeLinks}>
-            <div className='multi-btn link' onClick={handleClick}>{name}</div>
+            <div className={`multi-btn link ${show ? "active-btn" : ''}`} onClick={handleClick}>{name}</div>
             {
                 show ?
                     <div className='multi-links'>

@@ -45,7 +45,7 @@ export default function Nav() {
                     y="0px"
                     viewBox="0 0 377 377"
                     onClick={handleClick}
-                    style={{ fill: show ? "#15133C" : btnColor }}
+                    style={{ fill: show ? "#F1EEE9" : btnColor }}
                 >
                     <rect x="75" y="73.5" width="302" height="30" />
                     <rect y="73.5" width="30" height="30" />
@@ -59,15 +59,16 @@ export default function Nav() {
             <div className={`menu-links ${show ? "show" : "right"}`} onClick={closeLinks}>
                 <div className='links'>
                     <NavLink to="/">home</NavLink>
+                    <NavLink to="/group">Group</NavLink>
 
                     <MultiLink
                         name="multi"
                         links={[
                             <NavLink to="/2">link 1</NavLink>,
+                            <NavLink to="/2">link 1</NavLink>,
+                            <NavLink to="/2">link 1</NavLink>,
                         ]}
                     />
-                    <NavLink to="/1">link</NavLink>
-
                     <ProtectedLink to="/3" name="link 2" auths={[UserRole.STUDENT]} />
                 </div>
                 <User />

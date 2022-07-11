@@ -6,6 +6,17 @@
     .multi-btn {
         &:hover {
             cursor: pointer;
+            color: $basic-color  !important;
+        }
+
+        &.active-btn {
+            color: $basic-color-5  !important;
+            border-bottom: 2px solid $basic-color-5;
+
+            &:hover {
+                cursor: pointer;
+                color: $basic-color  !important;
+            }
         }
     }
 
@@ -16,7 +27,8 @@
         gap: 5px;
         margin-top: 5px;
         padding: 5px 0;
-        background-color: $basic-color-3-active;
+        margin-left: 5px;
+        border-left: 2px solid $basic-color-5;
     }
 }
 
@@ -29,21 +41,27 @@
             width: 100%;
             padding: 5px 10px !important;
             margin: 0 !important;
+
+            &.active-btn {
+                background-color: transparent !important;
+            }
         }
 
         .multi-links {
             position: absolute;
             top: 40px;
             padding: 5px;
-            background-color: $basic-color-2;
+            background: $background-color;
 
             a {
                 white-space: nowrap;
-                border-bottom: none;
+                border-bottom: none !important;
 
                 &:hover {
-                    background-color: $basic-color;
-                    border-bottom: none;
+                    color: $basic-color-3  !important;
+                    background-color: $basic-color  !important;
+                    border-bottom: none !important;
+                    border-radius: 10px !important;
                 }
             }
         }
