@@ -87,9 +87,14 @@ $breakWidth: 800px;
 @media screen and (min-width: $breakWidth) {
     .nav {
 
+        &.nav-relative {
+            width: 100%;
+        }
+
         &.nav-relative,
         &.nav-fixed {
             .menu-links {
+                border-left: none !important;
 
                 a,
                 .link {
@@ -106,9 +111,10 @@ $breakWidth: 800px;
         &.nav-relative {
             position: relative;
             box-shadow: 0px 5px 5px -5px #111;
+            background: $background-color;
 
             .menu-links {
-                background: $background-color;
+                background: transparent;
 
                 a,
                 .link {
@@ -141,11 +147,13 @@ $breakWidth: 800px;
 
                     &:hover,
                     &.active {
+                        color: $basic-color-3;
                         background-color: transparent;
                         transform: scale(1.02);
                     }
 
                     &:hover {
+
                         border-bottom: 4px solid $basic-color-4;
                     }
 

@@ -42,6 +42,10 @@
             padding: 5px 10px !important;
             margin: 0 !important;
 
+            &:hover {
+                color: $basic-color-5  !important;
+            }
+
             &.active-btn {
                 background-color: transparent !important;
             }
