@@ -1,0 +1,25 @@
+@import '../../../../app/assets/color.style.scss';
+
+.instructor-card {
+    max-width: 150px;
+
+    .circle {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: $background-color;
+        overflow: hidden;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .name {
+        color: $basic-color-3;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+}

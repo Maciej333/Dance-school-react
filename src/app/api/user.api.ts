@@ -7,3 +7,9 @@ export const getUser = (id: number) => {
         jwtConfig()
     )
 }
+
+export const getInstructors = () => {
+    return axios.get(
+        `http://localhost:8080/api/user/get_instructors`
+    )
+}

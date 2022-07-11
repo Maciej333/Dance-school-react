@@ -1,0 +1,15 @@
+.instructors {
+    max-width: 1200px;
+    margin: 0 auto 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+@media screen and (min-width: 600px) {
+    .instructors {
+        gap: 20px;
+    }
+}
