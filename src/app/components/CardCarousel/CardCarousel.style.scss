@@ -4,20 +4,19 @@
     position: relative;
     overflow-x: hidden;
     width: 100vw;
-    max-width: 1200px;
+    max-width: 1600px;
     min-height: 500px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    perspective: 1000px;
     transform-style: preserve-3d;
 
     .card-div {
         position: absolute;
         width: 200px;
         height: 400px;
-        transition: 1s all linear;
+        transition: 0.3s all ease-out;
     }
 }
 

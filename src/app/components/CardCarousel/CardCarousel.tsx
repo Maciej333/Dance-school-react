@@ -35,7 +35,7 @@ export default function CardCarousel(props: { cards: any[], cardComponent: React
     }
 
     return (
-        <div>
+        <div style={{ perspective: "1000px" }}>
             <div className='card-carousel'>
                 {
                     cards.map((element, id) => {
@@ -45,7 +45,7 @@ export default function CardCarousel(props: { cards: any[], cardComponent: React
                         const pozSide = poz / half;
                         const isRight = ((pozSide <= 1 && pozSide > 0) || pozSide < -1) ? true : false;
 
-                        let move = 200;
+                        let move = 100;
                         poz = Math.abs(poz);
                         if (isRight && id < position) {
                             poz = (max + 1) - poz;
@@ -58,15 +58,15 @@ export default function CardCarousel(props: { cards: any[], cardComponent: React
                         let card = '';
                         if (id !== position) {
                             if (isRight) {
-                                card = `translateX(${move}px) translateZ(-${100 + move}px)`;
+                                card = `translate(${2 * move}px) translateZ(-${move}px)`;
                             } else {
-                                card = `translateX(-${move}px) translateZ(-${100 + move}px)`;
+                                card = `translateX(-${2 * move}px) translateZ(-${move}px)`;
                             }
                         }
 
                         return <div
                             key={`[card]=${id}`}
-                            style={{ transform: card, zIndex: id === position ? "11" : "" }}
+                            style={{ transform: card, zIndex: id === position ? 10 + max : 10 + max - poz }}
                             className="card-div"
                         >
                             <props.cardComponent element={element} />
