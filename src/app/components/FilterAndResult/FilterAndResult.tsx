@@ -6,14 +6,14 @@ const noCloseClass = "no-close";
 export default function FilterAndResult(
     props: {
         Form: React.ComponentType<{ setFilters: (data: Object) => void }>,
-        Result: React.ComponentType<{ filters: Object }>
+        Result: React.ComponentType<{ filters: any }>,
+        initFilters: Object
     }
 ) {
 
-    const { Form, Result } = props;
+    const { Form, Result, initFilters } = props;
     const [show, setShow] = useState(false);
-    const [filters, setFilters] = useState({
-    });
+    const [filters, setFilters] = useState(initFilters);
 
     const handleFilters = (object: Object) => {
         setFilters(object);
@@ -24,7 +24,6 @@ export default function FilterAndResult(
             setShow(false);
         }
     }
-
 
     return (
         <div className='filter-result'>
