@@ -6,6 +6,7 @@ import { Instructor } from "./instructor.model";
 import { Location } from "./location.model";
 
 export type Group = {
+    [x: string]: unknown;
     id: number;
     createDate: Date;
     groupStatus: GroupStatus;
@@ -22,7 +23,7 @@ export type GroupChoreo = {
 
 export type GroupCourse = {
     classroomDay: string;
-    classroomStartTime: Date;
+    classroomStartTime: string;
     classroomDuration: number;
 } & Group
 
