@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { DanceLevel } from '../../../app/utils/enum/DanceLevel.enum'
-import { getDanceStyles } from '../../../app/api/danceStyle.api';
-import { DanceStyle } from '../../../app/model/danceStyle.model';
-import { Location } from '../../../app/model/location.model';
-import { getAllLocations } from '../../../app/api/location.api';
-import { Gender } from '../../../app/utils/enum/Gender.enum';
-import { changeEnumToArray } from '../../../app/utils/functions/changeEnumToArray';
+import { DanceLevel } from '../../../../app/utils/enum/DanceLevel.enum'
+import { getDanceStyles } from '../../../../app/api/danceStyle.api';
+import { DanceStyle } from '../../../../app/model/danceStyle.model';
+import { Location } from '../../../../app/model/location.model';
+import { getAllLocations } from '../../../../app/api/location.api';
+import { Gender } from '../../../../app/utils/enum/Gender.enum';
+import { changeEnumToArray } from '../../../../app/utils/functions/changeEnumToArray';
 
 export type groupFilters = {
     style: string | "",

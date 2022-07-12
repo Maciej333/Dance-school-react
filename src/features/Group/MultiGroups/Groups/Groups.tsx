@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { getOpenGroups } from '../../../app/api/group.api';
-import { withApi } from '../../../app/hoc/withApi';
-import { Group, GroupChoreo, GroupCourse } from '../../../app/model/group.model';
-import { Days } from '../../../app/utils/enum/Days.enum';
-import { changeEnumToArray } from '../../../app/utils/functions/changeEnumToArray';
+import { getOpenGroups } from '../../../../app/api/group.api';
+import { withApi } from '../../../../app/hoc/withApi';
+import { Group, GroupChoreo, GroupCourse } from '../../../../app/model/group.model';
+import { Days } from '../../../../app/utils/enum/Days.enum';
+import { changeEnumToArray } from '../../../../app/utils/functions/changeEnumToArray';
 import { groupFilters, initFilters } from '../GroupFilter/GroupFilter';
 import GroupCard from './GroupCard/GroupCard';
 import './Groups.style.scss';

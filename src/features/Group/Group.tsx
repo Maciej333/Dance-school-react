@@ -1,14 +1,8 @@
 import React from 'react'
-import FilterAndResult from '../../app/components/FilterAndResult/FilterAndResult'
-import GroupFilter, { initFilters } from './GroupFilter/GroupFilter'
-import Groups from './Groups/Groups'
+import GroupRoutes from './routes/GroupRoutes'
 
 export default function Group() {
     return (
-        <FilterAndResult
-            Form={GroupFilter}
-            Result={Groups}
-            initFilters={initFilters}
-        />
+        <GroupRoutes />
     )
 }

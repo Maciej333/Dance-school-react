@@ -1,13 +1,20 @@
-import React from 'react';
-import { Group, GroupChoreo, GroupCourse } from '../../../../app/model/group.model';
+import React, { memo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Group, GroupChoreo, GroupCourse } from '../../../../../app/model/group.model';
 import './GroupCard.style.scss';
 
-export default function GroupCard(props: { group: Group | GroupCourse | GroupChoreo }) {
+const GroupCardComponent = (props: { group: Group | GroupCourse | GroupChoreo }) => {
 
     const { group } = props;
 
+    const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate(`/group/${group.id}`);
+    }
+
     return (
-        <div className='group-card'>
+        <div className='group-card' onClick={handleNavigate}>
             <div className='card-header'>
                 {
                     group.name ?
@@ -28,3 +35,6 @@ export default function GroupCard(props: { group: Group | GroupCourse | GroupCho
         </div>
     )
 }
+
+const GroupCard = memo(GroupCardComponent);
+export default GroupCard;
