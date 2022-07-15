@@ -1,0 +1,22 @@
+@import '../../assets/color.style.scss';
+
+.modal {
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: $background-color-fixed-black-2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .content {
+        padding: 20px;
+        min-width: 200px;
+        min-height: 100px;
+        background-color: $basic-color-3;
+        border-radius: 20px;
+    }
+}
