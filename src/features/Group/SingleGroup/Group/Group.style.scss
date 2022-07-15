@@ -1,0 +1,41 @@
+@import '../../../../app/assets/color.style.scss';
+
+.group-component {
+    h2 {
+        padding: 25px 0;
+        color: $basic-color-5;
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-radius: 25px 5px;
+    }
+
+    .content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px;
+
+        .flex {
+            margin: 0 auto;
+
+            .color {
+                height: 25px;
+                width: 25px;
+                margin: 0 5px;
+            }
+        }
+
+        .flex:nth-of-type(1) {
+            order: 1;
+        }
+
+        .flex:nth-of-type(2) {
+            order: 2;
+        }
+    }
+}

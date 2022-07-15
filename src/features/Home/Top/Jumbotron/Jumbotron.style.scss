@@ -29,9 +29,10 @@
     }
 
     .content {
+        width: 100%;
+        box-sizing: border-box;
         padding: 20px 15px 30px;
         border-radius: 20px 0 0 0;
-        text-align: justify;
         font-weight: 600;
         overflow-y: auto;
         background-color: $basic-color-3;

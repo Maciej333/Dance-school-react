@@ -2,6 +2,7 @@
 
 .single-element {
     width: 96%;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -10,7 +11,7 @@
 
     .operations {
         position: relative;
-        margin-top: 25px;
+        margin-top: 50px;
         align-self: flex-start;
 
         .operations-btn {
@@ -20,6 +21,7 @@
         }
 
         .operations-list {
+            z-index: 21;
             position: absolute;
             top: 40px;
             left: -4px;
@@ -52,20 +54,87 @@
     .children {
         margin-top: 25px;
         width: 100%;
+
+        .flex {
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 10px;
+
+            h3 {
+                grid-column: 1/3;
+                width: 100%;
+                padding-bottom: 5px;
+                text-align: left;
+                text-transform: uppercase;
+                font-weight: 800;
+                letter-spacing: 2px;
+                border-bottom: 4px solid $basic-color-active;
+                transform: skew(-5deg);
+            }
+
+            p {
+                grid-column: 1/3;
+                margin: 0;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.color {
+                    color: $basic-color-4;
+                }
+
+                span {
+                    text-align: center;
+                }
+            }
+
+            span {
+                text-align: left;
+                font-size: 1.25rem;
+                font-weight: 700;
+
+                &.center {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                &:nth-of-type(odd) {
+                    margin-left: 20px;
+                    color: $basic-color-4;
+                    text-transform: uppercase;
+                }
+
+                &:nth-of-type(even) {
+                    margin-right: 20px;
+                }
+            }
+        }
     }
 }
 
-@media screen and (min-width: 800px) {
-
+@media screen and (min-width: 700px) {
     .single-element {
-        max-width: 1200px;
+        .children {
+            .flex {
+                max-width: 300px;
+            }
+        }
+    }
+}
 
-        .operations {
-            align-self: flex-end;
-
-            .operations-list {
-                left: auto;
-                right: -4px;
+@media screen and (min-width: 850px) {
+    .single-element {
+        .children {
+            .flex {
+                max-width: 350px;
             }
         }
     }

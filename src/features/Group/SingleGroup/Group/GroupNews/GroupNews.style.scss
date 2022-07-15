@@ -1,0 +1,27 @@
+.flex {
+    order: 3;
+
+    &.hide {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 650px) {
+    .flex {
+        &.show {
+            order: 1;
+        }
+    }
+}
+
+@media screen and (min-width: 950px) {
+    .flex {
+        &.show {
+            order: 3;
+        }
+
+        &.hide {
+            display: block;
+        }
+    }
+}
