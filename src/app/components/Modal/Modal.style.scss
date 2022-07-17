@@ -1,4 +1,4 @@
-@import '../../assets/color.style.scss';
+@import "../../assets/color.style.scss";
 
 .modal {
     z-index: 200;
@@ -11,12 +11,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(2px);
 
     .content {
         padding: 20px;
         min-width: 200px;
         min-height: 100px;
         background-color: $basic-color-3;
+        border: 2px solid $basic-color-active;
         border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        .modal-close {
+            align-self: flex-end;
+        }
     }
 }
