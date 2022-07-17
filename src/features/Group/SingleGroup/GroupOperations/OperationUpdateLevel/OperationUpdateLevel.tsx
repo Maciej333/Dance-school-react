@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { updateGroupLevel } from "../../../../../app/api/group.api";
 import { DanceLevel } from "../../../../../app/utils/enum/DanceLevel.enum";
 import { changeEnumToArray } from "../../../../../app/utils/functions/changeEnumToArray";
-import { RefreshContext } from "../../SingleGroup";
+import { RefreshContext } from "../../../../../app/components/SingleElement/SingleElementByIdParam/SingleElementByIdParam";
 
 export default function OperationUpdateLevel(props: {
     closeModal: () => void;
@@ -22,16 +22,13 @@ export default function OperationUpdateLevel(props: {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log("handleSubmit", Number(formData));
-
         updateGroupLevel(groupId, Number(formData))
             .then((data) => {
                 console.log("Data ", data);
-                refresh();
                 closeModal();
+                refresh();
             })
             .catch((err: Error) => {
-                console.log("err ", err);
                 setFormError("[Error] Cannot update group level");
             });
     };
