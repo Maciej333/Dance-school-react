@@ -1,4 +1,5 @@
 import { DanceLevel } from "../utils/enum/DanceLevel.enum";
+import { Days } from "../utils/enum/Days.enum";
 import { Gender } from "../utils/enum/Gender.enum";
 import { GroupStatus } from "../utils/enum/GroupStatus.enum";
 import { DanceStyle } from "./danceStyle.model";
@@ -15,8 +16,8 @@ export type Group = {
     danceStyle: DanceStyle | string;
     location: Location | string;
     instructors: Instructor[];
-	name?: string;
-	classroomDay?: string;
+    name?: string;
+    classroomDay?: Days;
     classroomStartTime?: string;
     classroomDuration?: number;
 }

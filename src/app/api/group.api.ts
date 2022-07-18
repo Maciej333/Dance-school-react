@@ -50,10 +50,6 @@ export const updateGroupInstructors = (
     );
 };
 
-
-
-
-
 export const addGroupCourse = (
     course: any
 ) => {
@@ -69,6 +65,28 @@ export const addGroupChoreo = (
 ) => {
     return axios.post(
         `http://localhost:8080/api/group/save_choreo`,
+        choreo,
+        jwtContentConfig()
+    );
+};
+
+export const updateGroupCourse = (
+    groupId: number,
+    course: any
+) => {
+    return axios.put(
+        `http://localhost:8080/api/group/update_course/${groupId}`,
+        course,
+        jwtContentConfig()
+    );
+};
+
+export const updateGroupChoreo = (
+    groupId: number,
+    choreo: any
+) => {
+    return axios.put(
+        `http://localhost:8080/api/group/update_choreo/${groupId}`,
         choreo,
         jwtContentConfig()
     );

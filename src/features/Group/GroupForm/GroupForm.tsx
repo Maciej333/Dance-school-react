@@ -14,12 +14,15 @@ import { DanceLevel } from '../../../app/utils/enum/DanceLevel.enum';
 import MultiSelect from '../../../app/components/MultiSelect/MultiSelect';
 import { changeEnumToArray } from '../../../app/utils/functions/changeEnumToArray';
 import { Days } from '../../../app/utils/enum/Days.enum';
-import { addGroupChoreo, addGroupCourse } from '../../../app/api/group.api';
+import { addGroupChoreo, addGroupCourse, getGroup, updateGroupChoreo, updateGroupCourse } from '../../../app/api/group.api';
+import { Group } from '../../../app/model/group.model';
+import { Gender } from '../../../app/utils/enum/Gender.enum';
 
 export const FORM_ADD = "FORM_ADD";
 export const FORM_EDIT = "FORM_EDIT";
-export const GROUP_ADD = 'Group added';
-export const GROUP_UPDATE = 'Group updated';
+const GROUP_ADD = 'Group added';
+const GROUP_UPDATE = 'Group updated';
+const GROUP_FETCH_ERROR = 'Cannot fetch group data';
 export const COURSE = "COURSE";
 export const CHOREO = "CHOREO";
 
@@ -109,7 +112,7 @@ export default function GroupForm(props: { type: string }) {
 
     const [formDataValidatorsCourse] = useState({
         classroomDay: [
-            validator(setError("classroomDay", "Day is required"))(notEmpty),
+            validator(setError("classroomDay", "Day is required"))(numberValue(0,6)),
         ],
         classroomStartTime: [
             validator(setError("classroomStartTime", "Start time is required"))(notEmpty),
@@ -155,6 +158,50 @@ export default function GroupForm(props: { type: string }) {
                 setMessage("Cannot load required datas");
             });
     }, [])
+
+    useEffect(() => {
+        if (id?.match(/\d+/)) {
+            getGroup(+id)
+                .then(data => {
+                    const group = data.data as Group;
+                    if (group.name) {
+                        setFormData(prev => {
+                            const newFormData = JSON.parse(JSON.stringify(prev));
+                            newFormData.type.value = CHOREO;
+                            newFormData.genderList.value = group.genderList.map(el => Gender[el]);
+                            if (typeof group.location !== "string")
+                                newFormData.locationId.value = group.location.id;
+                            if (typeof group.danceStyle !== "string")
+                                newFormData.danceStyleId.value = group.danceStyle.id;
+                            newFormData.danceLevel.value = group.danceLevel;
+                            newFormData.name.value = group.name;
+                            return newFormData;
+                        })
+                    } else {
+                        setFormData(prev => {
+                            const newFormData = JSON.parse(JSON.stringify(prev));
+                            newFormData.type.value = COURSE;
+                            newFormData.genderList.value = group.genderList.map(el => Gender[el]);
+                            if (typeof group.danceStyle !== "string")
+                                newFormData.danceStyleId.value = group.danceStyle.id;
+                            newFormData.danceLevel.value = group.danceLevel;
+                            if (typeof group.location !== "string")
+                                newFormData.locationId.value = group.location.id;
+                            if (group.classroomDay)
+                                newFormData.classroomDay.value = Days[group.classroomDay];
+                            newFormData.classroomStartTime.value = new Date("2000-01-01 " + group.classroomStartTime)
+                                .toLocaleTimeString()
+                                .substring(0, 5);
+                            newFormData.classroomDuration.value = group.classroomDuration;
+                            return newFormData;
+                        })
+                    }
+                })
+                .catch(err => {
+                    setMessage(GROUP_FETCH_ERROR);
+                })
+        }
+    }, [id])
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -206,8 +253,6 @@ export default function GroupForm(props: { type: string }) {
                 name: formData.name.value,
             };
 
-            // console.log("GROUP SUBMIT = ", group)
-
             if (type === FORM_ADD) {
                 if (formData.type.value === COURSE) {
                     addGroupCourse(group)
@@ -249,13 +294,45 @@ export default function GroupForm(props: { type: string }) {
                         })
                 }
             }
-            if (type === FORM_EDIT) {
-
+            if (type === FORM_EDIT && id?.match(/\d+/)) {
                 if (formData.type.value === COURSE) {
-
+                    updateGroupCourse(+id, group)
+                        .then(data => {
+                            if (data.data.status === 200) {
+                                setMessage(GROUP_UPDATE);
+                            }
+                            if (data.data.status === 500) {
+                                setMessage("Error cannot update group");
+                            }
+                        })
+                        .catch(err => {
+                            setMessage("Error cannot update group");
+                        })
                 }
                 if (formData.type.value === CHOREO) {
-
+                    updateGroupChoreo(+id, group)
+                        .then(data => {
+                            if (data.data.status === 200) {
+                                setMessage(GROUP_UPDATE);
+                            }
+                            if (data.data.status === 500) {
+                                setMessage("Error cannot update group");
+                            }
+                            if (data.data.status === 501) {
+                                setFormData(prev => {
+                                    return {
+                                        ...prev,
+                                        name: {
+                                            ...prev.name,
+                                            error: "Name is not unique"
+                                        }
+                                    }
+                                })
+                            }
+                        })
+                        .catch(err => {
+                            setMessage("Error cannot update group");
+                        })
                 }
             }
         }
@@ -264,7 +341,7 @@ export default function GroupForm(props: { type: string }) {
 
 
     return (
-        message === GROUP_ADD || message === GROUP_UPDATE ?
+        message === GROUP_ADD || message === GROUP_UPDATE || message === GROUP_FETCH_ERROR ?
             <div className='center'>
                 <span className='main-message'>{message}</span>
             </div>
