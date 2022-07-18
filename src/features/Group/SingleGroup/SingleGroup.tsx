@@ -28,7 +28,7 @@ const SingleGroupInteriorComponent = (props: { apiData?: any }) => {
 
     return (
         group && (
-            <SingleElement Operations={GroupOperations(group)}>
+            <SingleElement Operations={GroupOperations(group)} toNavigate="/group">
                 <Group group={group} />
             </SingleElement>
         )

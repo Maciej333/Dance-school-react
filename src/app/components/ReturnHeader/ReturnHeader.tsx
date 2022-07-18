@@ -2,14 +2,17 @@ import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react';
 import './ReturnHeader.style.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export default function ReturnHeader(props: { name: string }) {
+export default function ReturnHeader(props: { toNavigate: string, name: string, withProp?: boolean }) {
+
+    const { toNavigate, withProp, name } = props;
 
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const handleReturn = () => {
-        navigate(-1);
+        navigate(`${toNavigate}${withProp ? "/" + id : ''}`);
     };
 
     return (
@@ -20,7 +23,7 @@ export default function ReturnHeader(props: { name: string }) {
                 onClick={handleReturn}
             />
             <h2 className='return-header-name'>
-                {props.name}
+                {name}
             </h2>
             <span></span>
         </div>

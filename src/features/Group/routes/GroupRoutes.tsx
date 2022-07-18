@@ -10,8 +10,8 @@ export default function GroupRoutes() {
         <Routes>
             <Route path="" element={<Outlet />}>
                 <Route path="/" element={<MultiGroups />} />
-                <Route path="add" element={<><ReturnHeader name="Add group" /><GroupForm type={FORM_ADD} /></>} />
-                <Route path="edit/:id" element={<><ReturnHeader name="Edit group" /><GroupForm type={FORM_EDIT} /></>} />
+                <Route path="add" element={<><ReturnHeader toNavigate="/group" name="Add group" /><GroupForm type={FORM_ADD} /></>} />
+                <Route path="edit/:id" element={<><ReturnHeader toNavigate="/group" withProp={true} name="Edit group" /><GroupForm type={FORM_EDIT} /></>} />
                 <Route path=":id" element={<SingleGroup />} />
             </Route>
 

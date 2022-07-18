@@ -10,9 +10,10 @@ export default function SingleElement(props: {
         openModal: (content: JSX.Element) => void | null;
         closeModal: () => void;
     }>;
+    toNavigate: string,
     children: JSX.Element;
 }) {
-    const { Operations, children } = props;
+    const { Operations, toNavigate, children } = props;
     const navigate = useNavigate();
 
     const [show, setShow] = useState(false);
@@ -20,7 +21,7 @@ export default function SingleElement(props: {
     const [modalContent, setModalContent] = useState<JSX.Element | null>(null);
 
     const handleReturn = () => {
-        navigate(-1);
+        navigate(toNavigate);
     };
 
     const handleOpen = (content: JSX.Element) => {
@@ -50,9 +51,8 @@ export default function SingleElement(props: {
                                 Operations
                             </button>
                             <div
-                                className={`operations-list ${
-                                    show ? "show" : ""
-                                }`}
+                                className={`operations-list ${show ? "show" : ""
+                                    }`}
                             >
                                 <Operations
                                     openModal={handleOpen}
