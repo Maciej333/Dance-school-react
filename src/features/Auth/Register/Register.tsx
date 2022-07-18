@@ -2,10 +2,11 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import './Register.style.scss';
 import { notEmpty, stringLength, validate, validator } from '../../../app/utils/validators/validators';
 import { addStudent } from '../../../app/api/user.api';
+import withProtectedFromLogin from '../../../app/hoc/withProtectedFromLogin';
 
 const STUDENT_ADDED = "Account created successfully";
 
-export default function Register() {
+const RegisterComponent = () => {
 
   const [formData, setFormData] = useState({
     login: {
@@ -182,3 +183,6 @@ export default function Register() {
       </>
   )
 }
+
+const Register = withProtectedFromLogin(RegisterComponent);
+export default Register;

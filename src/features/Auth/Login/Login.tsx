@@ -10,8 +10,9 @@ import {
 } from "../../../app/utils/validators/validators";
 import { Navigate, NavLink } from "react-router-dom";
 import SmallLoading from "../../../app/components/SmallLoading/SmallLoading";
+import withProtectedFromLogin from "../../../app/hoc/withProtectedFromLogin";
 
-export default function Login() {
+const LoginComponent = () => {
 
     const { loading, error, user } = useAppSelector(selectAuth);
     const dispatch = useAppDispatch();
@@ -75,45 +76,48 @@ export default function Login() {
         }
     };
 
+    if (user.id > 0)
+        return <Navigate to="/profile" />;
+
     return (
-        user.id > 0 ?
-            <Navigate to="/profile" />
+        loading ?
+            <SmallLoading color="#ec994b" />
             :
-            loading ?
-                <SmallLoading color="#ec994b" />
-                :
-                <>
-                    <p className="register-p">Don't have account?
-                        <NavLink className="register-btn" to="/auth/register">Register now</NavLink>
-                    </p>
-                    <form className="login-form" onSubmit={handleSubmit}>
-                        <span className="main-error">{error}</span>
+            <>
+                <p className="register-p">Don't have account?
+                    <NavLink className="register-btn" to="/auth/register">Register now</NavLink>
+                </p>
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <span className="main-error">{error}</span>
 
-                        <label htmlFor="login">
-                            Login<span>*</span>
-                        </label>
-                        <input
-                            id="login"
-                            name="login"
-                            value={formData.login.value}
-                            onChange={handleChange}
-                        ></input>
-                        <span className="error">{formData.login.error}</span>
+                    <label htmlFor="login">
+                        Login<span>*</span>
+                    </label>
+                    <input
+                        id="login"
+                        name="login"
+                        value={formData.login.value}
+                        onChange={handleChange}
+                    ></input>
+                    <span className="error">{formData.login.error}</span>
 
-                        <label htmlFor="password">
-                            Password<span>*</span>
-                        </label>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            value={formData.password.value}
-                            onChange={handleChange}
-                        ></input>
-                        <span className="error">{formData.password.error}</span>
+                    <label htmlFor="password">
+                        Password<span>*</span>
+                    </label>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        value={formData.password.value}
+                        onChange={handleChange}
+                    ></input>
+                    <span className="error">{formData.password.error}</span>
 
-                        <button type="submit">Submit</button>
-                    </form>
-                </>
+                    <button type="submit">Submit</button>
+                </form>
+            </>
     );
 }
+
+const Login = withProtectedFromLogin(LoginComponent);
+export default Login;
