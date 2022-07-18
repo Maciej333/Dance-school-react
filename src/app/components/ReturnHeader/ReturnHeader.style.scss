@@ -1,0 +1,26 @@
+@import '../../assets/color.style.scss';
+
+.return-header {
+    position: relative;
+    width: 90vw;
+    max-width: 600px;
+    margin: 70px auto 0;
+    padding: 0 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .return-btn {
+        height: 40px;
+        transition: 0.6s all ease-out;
+
+        &:hover {
+            cursor: pointer;
+            color: $basic-color-4;
+        }
+    }
+
+    .return-header-name {
+        letter-spacing: 1px;
+    }
+}
