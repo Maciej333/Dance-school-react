@@ -16,11 +16,6 @@ const GroupOperations =
             closeModal: () => void;
         }) => {
 
-            const modalABC = <p>ABC</p>;
-            const handleShowABC = () => {
-                props.openModal(modalABC);
-            };
-
             const handleShowUpdateLevel = () => {
                 props.openModal(
                     <OperationUpdateLevel
@@ -62,9 +57,6 @@ const GroupOperations =
 
             return (
                 <>
-                    <button className="btn" onClick={handleShowABC}>
-                        ABC
-                    </button>
                     <div className="link-wrapper">
                         <ProtectedLink to={`/group/edit/${group.id}`} name="Edit group" auths={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]} />
                     </div>

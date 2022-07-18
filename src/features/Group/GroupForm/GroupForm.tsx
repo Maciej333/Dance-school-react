@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import './GroupForm.style.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getDanceStyles } from '../../../app/api/danceStyle.api';
 import { getAllLocations } from '../../../app/api/location.api';
 import { getInstructors } from '../../../app/api/user.api';
@@ -17,11 +17,10 @@ import { Days } from '../../../app/utils/enum/Days.enum';
 import { addGroupChoreo, addGroupCourse, getGroup, updateGroupChoreo, updateGroupCourse } from '../../../app/api/group.api';
 import { Group } from '../../../app/model/group.model';
 import { Gender } from '../../../app/utils/enum/Gender.enum';
+import { ModalContext } from '../../../App';
 
 export const FORM_ADD = "FORM_ADD";
 export const FORM_EDIT = "FORM_EDIT";
-const GROUP_ADD = 'Group added';
-const GROUP_UPDATE = 'Group updated';
 const GROUP_FETCH_ERROR = 'Cannot fetch group data';
 export const COURSE = "COURSE";
 export const CHOREO = "CHOREO";
@@ -29,6 +28,8 @@ export const CHOREO = "CHOREO";
 export default function GroupForm(props: { type: string }) {
 
     const { type } = props;
+    const navigate = useNavigate();
+    const { setValue } = useContext(ModalContext);
     const { id } = useParams();
     const { user } = useAppSelector(selectAuth);
 
@@ -112,7 +113,7 @@ export default function GroupForm(props: { type: string }) {
 
     const [formDataValidatorsCourse] = useState({
         classroomDay: [
-            validator(setError("classroomDay", "Day is required"))(numberValue(0,6)),
+            validator(setError("classroomDay", "Day is required"))(numberValue(0, 6)),
         ],
         classroomStartTime: [
             validator(setError("classroomStartTime", "Start time is required"))(notEmpty),
@@ -258,7 +259,8 @@ export default function GroupForm(props: { type: string }) {
                     addGroupCourse(group)
                         .then(data => {
                             if (data.data.status === 200) {
-                                setMessage(GROUP_ADD);
+                                navigate("/group");
+                                setValue("Group was added");
                             }
                             if (data.data.status === 500) {
                                 setMessage("Error cannot add group");
@@ -272,7 +274,8 @@ export default function GroupForm(props: { type: string }) {
                     addGroupChoreo(group)
                         .then(data => {
                             if (data.data.status === 200) {
-                                setMessage(GROUP_ADD);
+                                navigate("/group");
+                                setValue("Group was added");
                             }
                             if (data.data.status === 500) {
                                 setMessage("Error cannot add group");
@@ -299,7 +302,8 @@ export default function GroupForm(props: { type: string }) {
                     updateGroupCourse(+id, group)
                         .then(data => {
                             if (data.data.status === 200) {
-                                setMessage(GROUP_UPDATE);
+                                navigate(`/group/${id}`);
+                                setValue("Group was updated");
                             }
                             if (data.data.status === 500) {
                                 setMessage("Error cannot update group");
@@ -313,7 +317,8 @@ export default function GroupForm(props: { type: string }) {
                     updateGroupChoreo(+id, group)
                         .then(data => {
                             if (data.data.status === 200) {
-                                setMessage(GROUP_UPDATE);
+                                navigate(`/group/${id}`);
+                                setValue("Group was updated");
                             }
                             if (data.data.status === 500) {
                                 setMessage("Error cannot update group");
@@ -338,10 +343,8 @@ export default function GroupForm(props: { type: string }) {
         }
     };
 
-
-
     return (
-        message === GROUP_ADD || message === GROUP_UPDATE || message === GROUP_FETCH_ERROR ?
+        message === GROUP_FETCH_ERROR ?
             <div className='center'>
                 <span className='main-message'>{message}</span>
             </div>
