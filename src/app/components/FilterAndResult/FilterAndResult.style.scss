@@ -8,36 +8,43 @@
     position: relative;
     min-height: 100vh;
 
-    .filter {
-        position: fixed;
-        z-index: 21;
-        top: 0;
-        left: -100vw;
-        overflow-y: auto;
-        width: calc(100vw - 100px);
-        max-width: 300px;
-        height: 100vh;
-        padding: 25px 20px;
-        background-color: $basic-color-3;
-        border-right: 2px solid $basic-color;
-        transition: 0.7s all ease-out;
-        box-sizing: border-box;
-
-        &.show {
-            left: 0;
-        }
+    .filter-result-menu {
+        width: 100vw;
+        min-height: 50px;
     }
 
-    .result {
-        min-height: 100vh;
-        padding: 50px 25px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
+    .flex {
+        .filter {
+            position: fixed;
+            z-index: 21;
+            top: 0;
+            left: -100vw;
+            overflow-y: auto;
+            width: calc(100vw - 100px);
+            max-width: 300px;
+            height: 100vh;
+            padding: 25px 20px;
+            background-color: $basic-color-3;
+            border-right: 2px solid $basic-color;
+            transition: 0.7s all ease-out;
+            box-sizing: border-box;
 
-        .fixed-btn {
-            align-self: flex-start;
+            &.show {
+                left: 0;
+            }
+        }
+
+        .result {
+            min-height: 100vh;
+            padding: 25px 25px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+
+            .fixed-btn {
+                align-self: flex-start;
+            }
         }
     }
 }
@@ -46,17 +53,19 @@
     .filter-result {
         min-height: 0vh;
 
-        .filter {
-            position: absolute;
-            height: auto;
-            margin-top: 20px;
-            max-width: 300px;
-            border-top: 2px solid $basic-color;
-            border-bottom: 2px solid $basic-color;
-        }
+        .flex {
+            .filter {
+                position: absolute;
+                height: auto;
+                margin-top: 20px;
+                max-width: 300px;
+                border-top: 2px solid $basic-color;
+                border-bottom: 2px solid $basic-color;
+            }
 
-        .result {
-            min-height: 0;
+            .result {
+                min-height: 0;
+            }
         }
     }
 }
@@ -67,20 +76,34 @@
     }
 
     .filter-result {
+        width: 100%;
         max-width: 1400px;
         margin: 0 auto;
         display: flex;
+        flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
 
-        .filter {
-            position: relative;
-            left: 0;
-            border: none;
+        .filter-result-menu {
+            grid-column: 1/3;
+            width: 100%;
         }
 
-        .result {
-            width: 100%;
+        .flex {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            .filter {
+                position: relative;
+                left: 0;
+                margin-top: 0;
+                border: none;
+            }
+
+            .result {
+                width: 100%;
+            }
         }
     }
 }

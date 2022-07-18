@@ -4,7 +4,7 @@ import { withApi } from "../../../../app/hoc/withApi";
 import { Group } from "../../../../app/model/group.model";
 import { Days } from "../../../../app/utils/enum/Days.enum";
 import { changeEnumToArray } from "../../../../app/utils/functions/changeEnumToArray";
-import { groupFilters, initFilters } from "../GroupFilter/GroupFilter";
+import { groupFilters, initFilters } from "../GroupsFilter/GroupsFilter";
 import GroupCard from "./GroupCard/GroupCard";
 import "./Groups.style.scss";
 

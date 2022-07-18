@@ -21,7 +21,7 @@ export const initFilters: groupFilters = {
     gender: "",
 };
 
-export default function GroupFilter(props: {
+export default function GroupsFilter(props: {
     setFilters: (data: Object) => void;
 }) {
     const [formData, setFormData] = useState<groupFilters>(initFilters);

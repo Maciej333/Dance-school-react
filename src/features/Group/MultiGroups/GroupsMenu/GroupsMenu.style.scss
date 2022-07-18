@@ -1,0 +1,26 @@
+@import '../../../../app/assets/color.style.scss';
+
+.groups-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 80px 25px 0;
+
+    .groups-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 5px;
+
+        .btn {
+            color: $basic-color-active;
+            background: transparent;
+            text-transform: uppercase;
+
+            &:hover {
+                color: $basic-color-4;
+                transform: none;
+            }
+        }
+    }
+}
