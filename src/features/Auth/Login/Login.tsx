@@ -8,11 +8,14 @@ import {
     validate,
     validator,
 } from "../../../app/utils/validators/validators";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
+import SmallLoading from "../../../app/components/SmallLoading/SmallLoading";
 
 export default function Login() {
-    const { loading, error } = useAppSelector(selectAuth);
+
+    const { loading, error, user } = useAppSelector(selectAuth);
     const dispatch = useAppDispatch();
+
     const [formData, setFormData] = useState({
         login: {
             value: "",
@@ -73,38 +76,44 @@ export default function Login() {
     };
 
     return (
-        <>
-            <p className="register-p">Don't have account?
-                <NavLink className="register-btn" to="/auth/register">Register now</NavLink>
-            </p>
-            <form className="login-form" onSubmit={handleSubmit}>
-                <span className="main-error">{error}</span>
+        user.id > 0 ?
+            <Navigate to="/profile" />
+            :
+            loading ?
+                <SmallLoading color="#ec994b" />
+                :
+                <>
+                    <p className="register-p">Don't have account?
+                        <NavLink className="register-btn" to="/auth/register">Register now</NavLink>
+                    </p>
+                    <form className="login-form" onSubmit={handleSubmit}>
+                        <span className="main-error">{error}</span>
 
-                <label htmlFor="login">
-                    Login<span>*</span>
-                </label>
-                <input
-                    id="login"
-                    name="login"
-                    value={formData.login.value}
-                    onChange={handleChange}
-                ></input>
-                <span className="error">{formData.login.error}</span>
+                        <label htmlFor="login">
+                            Login<span>*</span>
+                        </label>
+                        <input
+                            id="login"
+                            name="login"
+                            value={formData.login.value}
+                            onChange={handleChange}
+                        ></input>
+                        <span className="error">{formData.login.error}</span>
 
-                <label htmlFor="password">
-                    Password<span>*</span>
-                </label>
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    value={formData.password.value}
-                    onChange={handleChange}
-                ></input>
-                <span className="error">{formData.password.error}</span>
+                        <label htmlFor="password">
+                            Password<span>*</span>
+                        </label>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            value={formData.password.value}
+                            onChange={handleChange}
+                        ></input>
+                        <span className="error">{formData.password.error}</span>
 
-                <button type="submit">Submit</button>
-            </form>
-        </>
+                        <button type="submit">Submit</button>
+                    </form>
+                </>
     );
 }
