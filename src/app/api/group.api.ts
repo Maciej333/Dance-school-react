@@ -1,10 +1,22 @@
 import axios from "axios";
 import { DanceLevel } from "../utils/enum/DanceLevel.enum";
 import { GroupStatus } from "../utils/enum/GroupStatus.enum";
-import { jwtContentConfig } from "./configs";
+import { jwtConfig, jwtContentConfig } from "./configs";
 
 export const getOpenGroups = () => {
     return axios.get(`http://localhost:8080/api/group/get_open`);
+};
+
+export const getStudentGroups = (studentId: number) => () => {
+    return axios.get(`http://localhost:8080/api/student/get_groups/${studentId}`, jwtConfig());
+};
+
+export const getInstructorGroups = (instructorId: number) => () => {
+    return axios.get(`http://localhost:8080/api/instructor/get_groups/${instructorId}`, jwtConfig());
+};
+
+export const getAllGroups = () => {
+    return axios.get(`http://localhost:8080/api/group/get_all`, jwtConfig());
 };
 
 export const getGroup = (id: number) => {

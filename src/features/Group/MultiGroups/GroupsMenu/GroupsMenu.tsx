@@ -13,11 +13,22 @@ export const TGroupAll = "ALL";
 
 export default function GroupsMenu() {
 
-    const { id, roles } = useAppSelector(selectAuth).user;
+    const { user } = useAppSelector(selectAuth);
     const navigate = useNavigate();
 
-    const handleNavigate = (stateType: string) => () => {
-        navigate("/group", { state: { type: stateType } })
+    const handleNavigate = (apiType: String) => () => {
+        navigate("/group", {
+            state: {
+                api: apiType,
+                userId: (apiType === TGroupInstructor && user.employee) ?
+                    user.employee.id
+                    :
+                    (apiType === TGroupStudent && user.student) ?
+                        user.student.id
+                        :
+                        0
+            }
+        })
     }
 
     const handleAddGroup = () => {
@@ -25,7 +36,7 @@ export default function GroupsMenu() {
     }
 
     return (
-        id > 0 ?
+        user.id > 0 ?
             <div className='groups-menu'>
                 <div className='groups-links'>
                     <button className='btn' onClick={handleNavigate(TGroupOpen)}>open groups</button>

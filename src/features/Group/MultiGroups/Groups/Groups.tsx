@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { getOpenGroups } from "../../../../app/api/group.api";
 import { withApi } from "../../../../app/hoc/withApi";
 import { Group } from "../../../../app/model/group.model";
 import { Days } from "../../../../app/utils/enum/Days.enum";
@@ -10,13 +9,13 @@ import "./Groups.style.scss";
 
 const GroupsComponent = (props: {
     apiData?: Group[];
-    filters: groupFilters;
+    filters?: groupFilters;
 }) => {
     const { apiData, filters } = props;
     const [groupsData, setGroupsData] = useState<Group[]>([]);
 
     useEffect(() => {
-        if (apiData) {
+        if (apiData && filters) {
             if (filters === initFilters) {
                 setGroupsData(apiData);
             } else {
@@ -93,9 +92,12 @@ const GroupsComponent = (props: {
     );
 };
 
-const Groups = withApi(
-    GroupsComponent,
-    "Cannot fetch groups data",
-    getOpenGroups
-);
+const Groups = (getGroups: () => Promise<any>) => {
+    const Groups = withApi(
+        GroupsComponent,
+        "Cannot fetch groups data",
+        getGroups
+    )
+    return Groups;
+}
 export default Groups;
