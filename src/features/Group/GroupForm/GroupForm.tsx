@@ -18,6 +18,7 @@ import { addGroupChoreo, addGroupCourse, getGroup, updateGroupChoreo, updateGrou
 import { Group } from '../../../app/model/group.model';
 import { Gender } from '../../../app/utils/enum/Gender.enum';
 import { ModalContext } from '../../../App';
+import SmallLoading from '../../../app/components/SmallLoading/SmallLoading';
 
 export const FORM_ADD = "FORM_ADD";
 export const FORM_EDIT = "FORM_EDIT";
@@ -33,6 +34,7 @@ export default function GroupForm(props: { type: string }) {
     const { id } = useParams();
     const { user } = useAppSelector(selectAuth);
 
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         type: {
             value: "",
@@ -162,6 +164,7 @@ export default function GroupForm(props: { type: string }) {
 
     useEffect(() => {
         if (id?.match(/\d+/)) {
+            setLoading(true);
             getGroup(+id)
                 .then(data => {
                     const group = data.data as Group;
@@ -201,6 +204,9 @@ export default function GroupForm(props: { type: string }) {
                 .catch(err => {
                     setMessage(GROUP_FETCH_ERROR);
                 })
+                .finally(() => {
+                    setLoading(false);
+                });
         }
     }, [id])
 
@@ -344,140 +350,143 @@ export default function GroupForm(props: { type: string }) {
     };
 
     return (
-        message === GROUP_FETCH_ERROR ?
-            <div className='center'>
-                <span className='main-message'>{message}</span>
-            </div>
+        loading ?
+            <SmallLoading color="white" />
             :
-            <form className='form group-form' onSubmit={handleSubmit}>
-                <span className="main-error">{message}</span>
+            message === GROUP_FETCH_ERROR ?
+                <div className='center'>
+                    <span className='main-message'>{message}</span>
+                </div>
+                :
+                <form className='form group-form' onSubmit={handleSubmit}>
+                    <span className="main-error">{message}</span>
 
-                {
-                    type === FORM_ADD ?
-                        <>
-                            <label htmlFor='type'>Type <span>*</span></label>
-                            <select id="type" name="type" value={formData.type.value} onChange={handleChange}>
-                                <option value="">***</option>
-                                <option value={COURSE}>Course</option>
-                                <option value={CHOREO}>Choreo</option>
-                            </select>
-                            <span className="error">{formData.type.error}</span>
-
-                            <label htmlFor='danceStyleId'>Style <span>*</span></label>
-                            <select id="danceStyleId" name="danceStyleId" value={formData.danceStyleId.value} onChange={handleChange}>
-                                <option value="">***</option>
-                                {
-                                    danceStyles.map(ds => {
-                                        return <option key={`[group form style ]= ${ds.id}`} value={ds.id}>{ds.name}</option>
-                                    })
-                                }
-                            </select>
-                            <span className="error">{formData.danceStyleId.error}</span>
-
-
-                            <label htmlFor='danceLevel'>Level <span>*</span></label>
-                            <select id="danceLevel" name="danceLevel" value={formData.danceLevel.value} onChange={handleChange}>
-                                <option value="">***</option>
-                                {
-                                    changeEnumToArray(DanceLevel).map((level, id) => {
-                                        return <option key={`[group form level]= ${id}`} value={DanceLevel[level as DanceLevel] + ""}>{level + ""}</option>
-                                    })
-                                }
-                            </select>
-                            <span className="error">{formData.danceLevel.error}</span>
-
-                            <label htmlFor='instructorIds'>Other Instructors</label>
-                            <MultiSelect
-                                all={instructors
-                                    .filter(inst => {
-                                        if (inst.user.id === user.id)
-                                            return false;
-                                        return true;
-                                    })
-                                    .map(inst => {
-                                        return {
-                                            id: inst.id,
-                                            value: `${inst.user.firstname} ${inst.user.lastname}`,
-                                            toString: () => `${inst.user.firstname} ${inst.user.lastname}`
-                                        }
-                                    })}
-                                selected={formData.instructorIds.value}
-                                select={handleSelect('instructorIds')}
-                            />
-                            <span className="error">{formData.instructorIds.error}</span>
-                        </>
-                        :
-                        null
-                }
-
-                <label htmlFor='genderList'>Gender <span>*</span></label>
-                <MultiSelect
-                    all={[
-                        {
-                            id: 0,
-                            value: `MALE`,
-                            toString: () => `MALE`
-                        },
-                        {
-                            id: 1,
-                            value: `FEMALE`,
-                            toString: () => `FEMALE`
-                        },
-                    ]}
-                    selected={formData.genderList.value}
-                    select={handleSelect('genderList')}
-                />
-                <span className="error">{formData.genderList.error}</span>
-
-                <label htmlFor='locationId'>Location <span>*</span></label>
-                <select id="locationId" name="locationId" value={formData.locationId.value} onChange={handleChange}>
-                    <option value="">***</option>
                     {
-                        locations.map(location => {
-                            return <option key={`[group form location ]= ${location.id}`} value={location.id}>{location.adress}</option>
-                        })
+                        type === FORM_ADD ?
+                            <>
+                                <label htmlFor='type'>Type <span>*</span></label>
+                                <select id="type" name="type" value={formData.type.value} onChange={handleChange}>
+                                    <option value="">***</option>
+                                    <option value={COURSE}>Course</option>
+                                    <option value={CHOREO}>Choreo</option>
+                                </select>
+                                <span className="error">{formData.type.error}</span>
+
+                                <label htmlFor='danceStyleId'>Style <span>*</span></label>
+                                <select id="danceStyleId" name="danceStyleId" value={formData.danceStyleId.value} onChange={handleChange}>
+                                    <option value="">***</option>
+                                    {
+                                        danceStyles.map(ds => {
+                                            return <option key={`[group form style ]= ${ds.id}`} value={ds.id}>{ds.name}</option>
+                                        })
+                                    }
+                                </select>
+                                <span className="error">{formData.danceStyleId.error}</span>
+
+
+                                <label htmlFor='danceLevel'>Level <span>*</span></label>
+                                <select id="danceLevel" name="danceLevel" value={formData.danceLevel.value} onChange={handleChange}>
+                                    <option value="">***</option>
+                                    {
+                                        changeEnumToArray(DanceLevel).map((level, id) => {
+                                            return <option key={`[group form level]= ${id}`} value={DanceLevel[level as DanceLevel] + ""}>{level + ""}</option>
+                                        })
+                                    }
+                                </select>
+                                <span className="error">{formData.danceLevel.error}</span>
+
+                                <label htmlFor='instructorIds'>Other Instructors</label>
+                                <MultiSelect
+                                    all={instructors
+                                        .filter(inst => {
+                                            if (inst.user.id === user.id)
+                                                return false;
+                                            return true;
+                                        })
+                                        .map(inst => {
+                                            return {
+                                                id: inst.id,
+                                                value: `${inst.user.firstname} ${inst.user.lastname}`,
+                                                toString: () => `${inst.user.firstname} ${inst.user.lastname}`
+                                            }
+                                        })}
+                                    selected={formData.instructorIds.value}
+                                    select={handleSelect('instructorIds')}
+                                />
+                                <span className="error">{formData.instructorIds.error}</span>
+                            </>
+                            :
+                            null
                     }
-                </select>
-                <span className="error">{formData.locationId.error}</span>
 
-                {
-                    formData.type.value === COURSE ?
-                        <>
-                            <label htmlFor='classroomDay'>Classroom day <span>*</span></label>
-                            <select id="classroomDay" name="classroomDay" value={formData.classroomDay.value} onChange={handleChange}>
-                                <option value="">***</option>
-                                {
-                                    changeEnumToArray(Days).map((day, id) => {
-                                        return <option key={`[group form day ]= ${id}`} value={id}>{day + ""}</option>
-                                    })
-                                }
-                            </select>
-                            <span className="error">{formData.classroomDay.error}</span>
+                    <label htmlFor='genderList'>Gender <span>*</span></label>
+                    <MultiSelect
+                        all={[
+                            {
+                                id: 0,
+                                value: `MALE`,
+                                toString: () => `MALE`
+                            },
+                            {
+                                id: 1,
+                                value: `FEMALE`,
+                                toString: () => `FEMALE`
+                            },
+                        ]}
+                        selected={formData.genderList.value}
+                        select={handleSelect('genderList')}
+                    />
+                    <span className="error">{formData.genderList.error}</span>
 
-                            <label htmlFor='classroomStartTime'>Classroom start <span>*</span></label>
-                            <input id="classroomStartTime" name="classroomStartTime" type="time" value={formData.classroomStartTime.value} onChange={handleChange}></input>
-                            <span className="error">{formData.classroomStartTime.error}</span>
+                    <label htmlFor='locationId'>Location <span>*</span></label>
+                    <select id="locationId" name="locationId" value={formData.locationId.value} onChange={handleChange}>
+                        <option value="">***</option>
+                        {
+                            locations.map(location => {
+                                return <option key={`[group form location ]= ${location.id}`} value={location.id}>{location.adress}</option>
+                            })
+                        }
+                    </select>
+                    <span className="error">{formData.locationId.error}</span>
 
-                            <label htmlFor='classroomDuration'>Classroom duration <span>*</span></label>
-                            <input id="classroomDuration" name="classroomDuration" type="number" value={formData.classroomDuration.value} onChange={handleChange}></input>
-                            <span className="error">{formData.classroomDuration.error}</span>
-                        </>
-                        :
-                        null
-                }
+                    {
+                        formData.type.value === COURSE ?
+                            <>
+                                <label htmlFor='classroomDay'>Classroom day <span>*</span></label>
+                                <select id="classroomDay" name="classroomDay" value={formData.classroomDay.value} onChange={handleChange}>
+                                    <option value="">***</option>
+                                    {
+                                        changeEnumToArray(Days).map((day, id) => {
+                                            return <option key={`[group form day ]= ${id}`} value={id}>{day + ""}</option>
+                                        })
+                                    }
+                                </select>
+                                <span className="error">{formData.classroomDay.error}</span>
 
-                {
-                    formData.type.value === CHOREO ?
-                        <>
-                            <label htmlFor='name'>NAZWA <span>*</span></label>
-                            <input id="name" name="name" value={formData.name.value} onChange={handleChange}></input>
-                            <span className="error">{formData.name.error}</span>
-                        </>
-                        :
-                        null
-                }
+                                <label htmlFor='classroomStartTime'>Classroom start <span>*</span></label>
+                                <input id="classroomStartTime" name="classroomStartTime" type="time" value={formData.classroomStartTime.value} onChange={handleChange}></input>
+                                <span className="error">{formData.classroomStartTime.error}</span>
 
-                <button type='submit'>{id ? "Edit group" : "Add group"}</button>
-            </form >
+                                <label htmlFor='classroomDuration'>Classroom duration <span>*</span></label>
+                                <input id="classroomDuration" name="classroomDuration" type="number" value={formData.classroomDuration.value} onChange={handleChange}></input>
+                                <span className="error">{formData.classroomDuration.error}</span>
+                            </>
+                            :
+                            null
+                    }
+
+                    {
+                        formData.type.value === CHOREO ?
+                            <>
+                                <label htmlFor='name'>NAZWA <span>*</span></label>
+                                <input id="name" name="name" value={formData.name.value} onChange={handleChange}></input>
+                                <span className="error">{formData.name.error}</span>
+                            </>
+                            :
+                            null
+                    }
+
+                    <button type='submit'>{id ? "Edit group" : "Add group"}</button>
+                </form >
     )
 }
