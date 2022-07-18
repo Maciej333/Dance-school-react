@@ -91,3 +91,10 @@ export const updateGroupChoreo = (
         jwtContentConfig()
     );
 };
+
+export const deleteGroup = (groupId: number) => {
+    return axios.delete(
+        `http://localhost:8080/api/group/delete/${groupId}`,
+        jwtConfig()
+    );
+}

@@ -7,6 +7,7 @@ import { UserRole } from "../../../../app/utils/enum/UserRole.enum";
 import OperationUpdateInstructors from "./OperationUpdateInstructors/OperationUpdateInstructors";
 import OperationUpdateLevel from "./OperationUpdateLevel/OperationUpdateLevel";
 import OperationUpdateStatus from "./OperationUpdateStatus/OperationUpdateStatus";
+import OperationDeleteGroup from "./OperationDeleteGroup/OperationDeleteGroup";
 
 const GroupOperations =
     (group: Group) =>
@@ -50,6 +51,15 @@ const GroupOperations =
                 );
             };
 
+            const handleShowDeleteGroup = () => {
+                props.openModal(
+                    <OperationDeleteGroup
+                        closeModal={props.closeModal}
+                        groupId={group.id}
+                    />
+                );
+            };
+
             return (
                 <>
                     <button className="btn" onClick={handleShowABC}>
@@ -72,6 +82,11 @@ const GroupOperations =
                         roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
                         onClick={handleShowUpdateInstructors}
                         name="Edit instructors"
+                    />
+                    <ProtectedOperation
+                        roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
+                        onClick={handleShowDeleteGroup}
+                        name="Delete group"
                     />
                 </>
             );
