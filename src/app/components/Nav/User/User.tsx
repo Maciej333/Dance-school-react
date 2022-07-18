@@ -1,11 +1,12 @@
 import React from 'react';
 import './User.style.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hook/store.hook';
 import { changeRole, logout, selectAuth } from '../../../store/auth/authSlice';
 
 export default function User() {
 
+    const navigate = useNavigate();
     const { role, user } = useAppSelector(selectAuth);
     const dispatch = useAppDispatch();
 
@@ -23,6 +24,7 @@ export default function User() {
 
     const handleLogout = () => {
         dispatch(logout());
+        navigate("/auth/login");
     }
 
     return (

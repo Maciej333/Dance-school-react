@@ -8,6 +8,7 @@ import {
     validate,
     validator,
 } from "../../../app/utils/validators/validators";
+import { NavLink } from "react-router-dom";
 
 export default function Login() {
     const { loading, error } = useAppSelector(selectAuth);
@@ -72,33 +73,38 @@ export default function Login() {
     };
 
     return (
-        <form className="login-form" onSubmit={handleSubmit}>
-            <span className="main-error">{error}</span>
+        <>
+            <p className="register-p">Don't have account?
+                <NavLink className="register-btn" to="/auth/register">Register now</NavLink>
+            </p>
+            <form className="login-form" onSubmit={handleSubmit}>
+                <span className="main-error">{error}</span>
 
-            <label htmlFor="login">
-                <span>*</span>Login
-            </label>
-            <input
-                id="login"
-                name="login"
-                value={formData.login.value}
-                onChange={handleChange}
-            ></input>
-            <span className="error">{formData.login.error}</span>
+                <label htmlFor="login">
+                    Login<span>*</span>
+                </label>
+                <input
+                    id="login"
+                    name="login"
+                    value={formData.login.value}
+                    onChange={handleChange}
+                ></input>
+                <span className="error">{formData.login.error}</span>
 
-            <label htmlFor="password">
-                <span>*</span>Password
-            </label>
-            <input
-                id="password"
-                name="password"
-                type="password"
-                value={formData.password.value}
-                onChange={handleChange}
-            ></input>
-            <span className="error">{formData.password.error}</span>
+                <label htmlFor="password">
+                    Password<span>*</span>
+                </label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    value={formData.password.value}
+                    onChange={handleChange}
+                ></input>
+                <span className="error">{formData.password.error}</span>
 
-            <button type="submit">Submit</button>
-        </form>
+                <button type="submit">Submit</button>
+            </form>
+        </>
     );
 }

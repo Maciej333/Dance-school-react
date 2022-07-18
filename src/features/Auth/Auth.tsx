@@ -1,10 +1,8 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from 'react';
+import AuthRoutes from './routes/AuthRotes';
 
 export default function Auth() {
     return (
-        <div style={{ height: '200vh' }}>
-            <Outlet />
-        </div>
+        <AuthRoutes />
     )
 }

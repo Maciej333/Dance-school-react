@@ -5,17 +5,13 @@ import Loading from '../components/Loading/Loading';
 import NotFound from '../components/NotFound/NotFound';
 
 const Auth = lazy(() => import("../../features/Auth/Auth"));
-const Login = lazy(() => import("../../features/Auth/Login/Login"));
 const Group = lazy(() => import("../../features/Group/Group"));
 
 export default function AppRoutes() {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
-
-            <Route path="/auth/*" element={<Suspense fallback={<Loading />}><Auth /></Suspense>}>
-                <Route path="login" element={<Suspense fallback={<>...</>}><Login /></Suspense>} />
-            </Route>
+            <Route path="/auth/*" element={<Suspense fallback={<Loading />}><Auth /></Suspense>} />
 
             <Route path="/group/*" element={<Suspense fallback={<Loading />}><Group /></Suspense>} />
 

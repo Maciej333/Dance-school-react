@@ -13,3 +13,10 @@ export const getInstructors = () => {
         `http://localhost:8080/api/user/get_instructors`
     )
 }
+
+export const addStudent = (newStudent: any) => {
+    return axios.post(
+        `http://localhost:8080/api/user/save_student`,
+        newStudent
+    )
+}
