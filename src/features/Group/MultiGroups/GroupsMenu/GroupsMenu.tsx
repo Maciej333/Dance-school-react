@@ -40,22 +40,22 @@ export default function GroupsMenu() {
         user.id > 0 ?
             <div className='groups-menu'>
                 <div className='groups-links'>
-                    <button className={`btn ${state.api === TGroupOpen ? 'active' : ''}`} onClick={handleNavigate(TGroupOpen)}>open groups</button>
+                    <button className={`btn ${state && state.api === TGroupOpen ? 'active' : ''}`} onClick={handleNavigate(TGroupOpen)}>open groups</button>
                     <ProtectedOperation
                         roles={[UserRole.STUDENT]}
-                        className={`${state.api === TGroupStudent ? 'active' : ''}`}
+                        className={`${state && state.api === TGroupStudent ? 'active' : ''}`}
                         onClick={handleNavigate(TGroupStudent)}
                         name="My groups"
                     />
                     <ProtectedOperation
                         roles={[UserRole.INSTRUCTOR]}
-                        className={`${state.api === TGroupInstructor ? 'active' : ''}`}
+                        className={`${state && state.api === TGroupInstructor ? 'active' : ''}`}
                         onClick={handleNavigate(TGroupInstructor)}
                         name="My groups"
                     />
                     <ProtectedOperation
                         roles={[UserRole.DIRECTOR]}
-                        className={`${state.api === TGroupAll ? 'active' : ''}`}
+                        className={`${state && state.api === TGroupAll ? 'active' : ''}`}
                         onClick={handleNavigate(TGroupAll)}
                         name="All grous"
                     />
