@@ -17,6 +17,10 @@
             background: transparent;
             text-transform: uppercase;
 
+            &.active {
+                border-color: $basic-color-4-active;
+            }
+
             &:hover {
                 color: $basic-color-4;
                 transform: none;

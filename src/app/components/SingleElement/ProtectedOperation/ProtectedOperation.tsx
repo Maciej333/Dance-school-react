@@ -3,7 +3,7 @@ import { useAppSelector } from '../../../hook/store.hook';
 import { selectAuth } from '../../../store/auth/authSlice';
 import { UserRole } from '../../../utils/enum/UserRole.enum';
 
-const ProtectedOperationComponent = (props: { roles: UserRole[], onClick: () => void, name: string }) => {
+const ProtectedOperationComponent = (props: { roles: UserRole[], onClick: () => void, name: string, className?: string }) => {
 
     const { role } = useAppSelector(selectAuth);
 
@@ -18,7 +18,7 @@ const ProtectedOperationComponent = (props: { roles: UserRole[], onClick: () => 
 
     return (
         isRole ?
-            <button className='btn' onClick={handleClick}>{props.name}</button>
+            <button className={`btn ${props.className ? props.className : ''}`} onClick={handleClick}>{props.name}</button>
             :
             null
     )
