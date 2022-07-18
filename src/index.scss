@@ -36,6 +36,22 @@ code {
   }
 }
 
+.center {
+  width: 100vw;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .main-message {
+    margin: 100px auto;
+    color: $basic-color-4-active;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+}
+
 form {
   display: flex;
   flex-direction: column;

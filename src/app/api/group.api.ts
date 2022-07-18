@@ -49,3 +49,27 @@ export const updateGroupInstructors = (
         jwtContentConfig()
     );
 };
+
+
+
+
+
+export const addGroupCourse = (
+    course: any
+) => {
+    return axios.post(
+        `http://localhost:8080/api/group/save_course`,
+        course,
+        jwtContentConfig()
+    );
+};
+
+export const addGroupChoreo = (
+    choreo: any
+) => {
+    return axios.post(
+        `http://localhost:8080/api/group/save_choreo`,
+        choreo,
+        jwtContentConfig()
+    );
+};
