@@ -26,3 +26,14 @@ export const updateGroupStatus = (id: number, newStatus: GroupStatus) => {
         jwtContentConfig()
     );
 };
+
+export const updateGroupInstructors = (
+    id: number,
+    newInstructors: number[]
+) => {
+    return axios.put(
+        `http://localhost:8080/api/group/udpate_instructors/${id}`,
+        newInstructors,
+        jwtContentConfig()
+    );
+};

@@ -1,0 +1,13 @@
+.operation-update-instructors {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 30px;
+
+    .label {
+        align-self: flex-start;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+}
