@@ -12,15 +12,13 @@ export default function ProtectedRoute(props: { children: JSX.Element, auths: Us
 
     const { children, auths } = props;
     const location = useLocation();
-    const { roles } = useAppSelector(selectAuth).user;
+    const { role } = useAppSelector(selectAuth);
 
     let isRole = false;
 
-    roles.forEach(role => {
-        if (auths.includes(+UserRole[role])) {
-            isRole = true;
-        }
-    })
+    if (role && props.auths.includes(+UserRole[role])) {
+        isRole = true;
+    }
 
     if (!isRole) {
         return <Navigate to="/auth/login" state={{ from: location.pathname, role: auths }} replace />;

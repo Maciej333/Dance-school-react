@@ -5,14 +5,12 @@ import { UserRole } from '../../../utils/enum/UserRole.enum';
 
 const ProtectedOperationComponent = (props: { roles: UserRole[], onClick: () => void, name: string }) => {
 
-    const { roles } = useAppSelector(selectAuth).user;
+    const { role } = useAppSelector(selectAuth);
 
     let isRole = false;
-    roles.forEach(role => {
-        if (props.roles.includes(+UserRole[role])) {
-            isRole = true;
-        }
-    })
+    if (role && props.roles.includes(+UserRole[role])) {
+        isRole = true;
+    }
 
     const handleClick = () => {
         props.onClick();

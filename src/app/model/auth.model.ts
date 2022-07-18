@@ -2,6 +2,7 @@ import { User } from "./user.model"
 
 export type AuthState = {
     user: User,
+    role: number | null,
     loading: boolean,
     error: string
 }

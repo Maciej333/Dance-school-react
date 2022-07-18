@@ -7,15 +7,13 @@ import { UserRole } from '../../../utils/enum/UserRole.enum';
 export default function ProtectedLink(props: { name: string, to: string, auths: number[] }) {
 
     const { name, to, auths } = props;
-    const { roles } = useAppSelector(selectAuth).user;
+    const { role } = useAppSelector(selectAuth);
 
     let inRole = false;
 
-    roles.forEach(role => {
-        if (auths.includes(+UserRole[role])) {
-            inRole = true;
-        }
-    })
+    if (role && auths.includes(+UserRole[role])) {
+        inRole = true;
+    }
 
     if (inRole) {
         return <NavLink to={to}>{name}</NavLink>

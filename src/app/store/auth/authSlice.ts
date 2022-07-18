@@ -10,6 +10,7 @@ export const jwtTokenRefresh = "refresh";
 
 const initialState: AuthState = {
     user: initUser,
+    role: null,
     loading: false,
     error: ""
 }
@@ -62,31 +63,37 @@ export const authSlice = createSlice({
         builder
             .addCase(login.pending, (state) => {
                 state.user = initialState.user;
+                state.role = null;
                 state.loading = true;
                 state.error = "";
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.user = action.payload;
+                state.role = action.payload.roles[0];
                 state.loading = false;
                 state.error = "";
             })
             .addCase(login.rejected, (state) => {
                 state.user = initialState.user;
+                state.role = null;
                 state.loading = false;
                 state.error = "Login error";
             })
             .addCase(refresh.pending, (state) => {
                 state.user = initialState.user;
+                state.role = null;
                 state.loading = true;
                 state.error = "";
             })
             .addCase(refresh.fulfilled, (state, action) => {
                 state.user = action.payload;
+                state.role = action.payload.roles[0];
                 state.loading = false;
                 state.error = "";
             })
             .addCase(refresh.rejected, (state) => {
                 state.user = initialState.user;
+                state.role = null;
                 state.loading = false;
                 state.error = "";
             });

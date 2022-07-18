@@ -2,9 +2,6 @@ import React, { MouseEvent, useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import './Nav.style.scss';
 import User from './User/User'
-import ProtectedLink from './ProtectedLink/ProtectedLink';
-import { UserRole } from '../../utils/enum/UserRole.enum';
-import MultiLink from './MultiLink/MultiLink';
 
 
 export default function Nav() {
@@ -60,16 +57,6 @@ export default function Nav() {
                 <div className='links'>
                     <NavLink to="/">home</NavLink>
                     <NavLink to="/group">Group</NavLink>
-
-                    <MultiLink
-                        name="multi"
-                        links={[
-                            <NavLink to="/2">link 1</NavLink>,
-                            <NavLink to="/2">link 1</NavLink>,
-                            <NavLink to="/2">link 1</NavLink>,
-                        ]}
-                    />
-                    <ProtectedLink to="/3" name="link 2" auths={[UserRole.STUDENT]} />
                 </div>
                 <User />
             </div>
