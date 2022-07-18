@@ -3,6 +3,7 @@ import ProtectedOperation from "../../../../app/components/SingleElement/Protect
 import { Group } from "../../../../app/model/group.model";
 import { UserRole } from "../../../../app/utils/enum/UserRole.enum";
 import OperationUpdateLevel from "./OperationUpdateLevel/OperationUpdateLevel";
+import OperationUpdateStatus from "./OperationUpdateStatus/OperationUpdateStatus";
 
 const GroupOperations =
     (group: Group) =>
@@ -25,15 +26,31 @@ const GroupOperations =
             );
         };
 
+        const handleShowUpdateStatus = () => {
+            props.openModal(
+                <OperationUpdateStatus
+                    closeModal={props.closeModal}
+                    groupId={group.id}
+                    status={group.groupStatus}
+                />
+            );
+        };
+
         return (
             <>
                 <button className="btn" onClick={handleShowABC}>
                     ABC
                 </button>
+
                 <ProtectedOperation
                     roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
                     onClick={handleShowUpdateLevel}
-                    name="Update level"
+                    name="Edit level"
+                />
+                <ProtectedOperation
+                    roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
+                    onClick={handleShowUpdateStatus}
+                    name="Edit status"
                 />
             </>
         );

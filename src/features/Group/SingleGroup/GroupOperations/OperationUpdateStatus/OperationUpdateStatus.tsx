@@ -1,17 +1,17 @@
 import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
-import { updateGroupLevel } from "../../../../../app/api/group.api";
-import { DanceLevel } from "../../../../../app/utils/enum/DanceLevel.enum";
-import { changeEnumToArray } from "../../../../../app/utils/functions/changeEnumToArray";
+import { updateGroupStatus } from "../../../../../app/api/group.api";
 import { RefreshContext } from "../../../../../app/components/SingleElement/SingleElementByIdParam/SingleElementByIdParam";
+import { GroupStatus } from "../../../../../app/utils/enum/GroupStatus.enum";
+import { changeEnumToArray } from "../../../../../app/utils/functions/changeEnumToArray";
 
-export default function OperationUpdateLevel(props: {
+export default function OperationUpdateStatus(props: {
     closeModal: () => void;
     groupId: number;
-    level: DanceLevel;
+    status: GroupStatus;
 }) {
-    const { closeModal, groupId, level } = props;
+    const { closeModal, groupId, status } = props;
     const { refresh } = useContext(RefreshContext);
-    const [formData, setFormData] = useState(DanceLevel[level] + "");
+    const [formData, setFormData] = useState(GroupStatus[status] + "");
     const [formError, setFormError] = useState("");
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -22,13 +22,13 @@ export default function OperationUpdateLevel(props: {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        updateGroupLevel(groupId, Number(formData))
+        updateGroupStatus(groupId, Number(formData))
             .then((data) => {
                 closeModal();
                 refresh();
             })
-            .catch((err: Error) => {
-                setFormError("[Error] Cannot update group level");
+            .catch((err) => {
+                setFormError("[Error] Cannot update group status");
             });
     };
 
@@ -39,16 +39,16 @@ export default function OperationUpdateLevel(props: {
             </span>
             <label htmlFor="danceLevel">Dance level</label>
             <select
-                id="danceLevel"
-                name="danceLevel"
+                id="groupStatus"
+                name="groupStatus"
                 value={formData}
                 onChange={handleChange}
             >
-                {changeEnumToArray(DanceLevel).map((el, id) => {
+                {changeEnumToArray(GroupStatus).map((el, id) => {
                     return (
                         <option
-                            key={`[operation dance level] = ${id}`}
-                            value={DanceLevel[el as DanceLevel] + ""}
+                            key={`[operation group status] = ${id}`}
+                            value={GroupStatus[el as GroupStatus] + ""}
                         >
                             {el + ""}
                         </option>
