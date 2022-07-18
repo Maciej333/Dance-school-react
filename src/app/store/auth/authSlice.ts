@@ -53,8 +53,12 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        changeRole: (state, action) => {
+            state.role = action.payload;
+        },
         authLogout: (state) => {
             state.user = initialState.user;
+            state.role = null;
             state.loading = false;
             state.error = "";
         }
@@ -101,5 +105,6 @@ export const authSlice = createSlice({
 });
 
 const { authLogout } = authSlice.actions;
+export const { changeRole } = authSlice.actions;
 export const selectAuth = (state: RootState) => state.auth;
 export default authSlice.reducer;
