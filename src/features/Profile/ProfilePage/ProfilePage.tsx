@@ -10,7 +10,7 @@ export default function ProfilePage() {
     const { user, role } = useAppSelector(selectAuth);
 
     return (
-        <SingleElement Operations={<ProfileOperations />} toNavigate="">
+        <SingleElement Operations={<ProfileOperations user={user} />} toNavigate="">
             <ProfileData user={user} role={role ? role : -1} />
         </SingleElement>
     )

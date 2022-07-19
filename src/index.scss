@@ -36,6 +36,16 @@ code {
   }
 }
 
+.link {
+  @extend .btn;
+  text-decoration: none;
+  box-sizing: border-box;
+
+  &:hover {
+    transform: none;
+  }
+}
+
 .center {
   width: 100vw;
   min-height: 50vh;
