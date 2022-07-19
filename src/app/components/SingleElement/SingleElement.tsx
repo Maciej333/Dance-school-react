@@ -39,11 +39,16 @@ export default function SingleElement(props: {
             <SingleElementContext.Provider value={{ openModal: handleOpen, closeModal: handleClose }}>
                 <div className="single-element">
                     <div className="operations">
-                        <FontAwesomeIcon
-                            icon={faLeftLong}
-                            className="return-btn"
-                            onClick={handleReturn}
-                        />
+                        {
+                            toNavigate ?
+                                <FontAwesomeIcon
+                                    icon={faLeftLong}
+                                    className="return-btn"
+                                    onClick={handleReturn}
+                                />
+                                :
+                                <span></span>
+                        }
                         {
                             Operations ?
                                 Operations
