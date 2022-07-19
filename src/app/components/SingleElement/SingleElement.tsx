@@ -1,73 +1,59 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import "./SingleElement.style.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 
+export const SingleElementContext = createContext({
+    openModal: (content: JSX.Element) => { },
+    closeModal: () => { },
+});
+
 export default function SingleElement(props: {
-    Operations: React.ComponentType<{
-        openModal: (content: JSX.Element) => void | null;
-        closeModal: () => void;
-    }> | null;
+    Operations: JSX.Element;
     toNavigate: string,
     children: JSX.Element;
 }) {
     const { Operations, toNavigate, children } = props;
     const navigate = useNavigate();
 
-    const [show, setShow] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [modalContent, setModalContent] = useState<JSX.Element | null>(null);
-
-    const handleReturn = () => {
-        navigate(toNavigate);
-    };
+    const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
     const handleOpen = (content: JSX.Element) => {
-        setShowModal(true);
         setModalContent(content);
+        setShowModal(true);
     };
 
     const handleClose = () => {
         setShowModal(false);
     };
 
+    const handleReturn = () => {
+        navigate(toNavigate);
+    };
+
     return (
         <>
-            <div className="single-element">
-                <div className="operations">
-                    <FontAwesomeIcon
-                        icon={faLeftLong}
-                        className="return-btn"
-                        onClick={handleReturn}
-                    />
-                    {
-                        Operations ? (
-                            <div className="operations-btn-wrapper">
-                                <button
-                                    className="btn operations-btn"
-                                    onClick={() => setShow((prev) => !prev)}
-                                >
-                                    Operations
-                                </button>
-                                <div
-                                    className={`operations-list ${show ? "show" : ""
-                                        }`}
-                                >
-                                    <Operations
-                                        openModal={handleOpen}
-                                        closeModal={handleClose}
-                                    />
-                                </div>
-                            </div>
-                        )
-                            :
-                            null
-                    }
+            <SingleElementContext.Provider value={{ openModal: handleOpen, closeModal: handleClose }}>
+                <div className="single-element">
+                    <div className="operations">
+                        <FontAwesomeIcon
+                            icon={faLeftLong}
+                            className="return-btn"
+                            onClick={handleReturn}
+                        />
+                        {
+                            Operations ?
+                                Operations
+                                :
+                                null
+                        }
+                    </div>
+                    <div className="children">{children}</div>
                 </div>
-                <div className="children">{children}</div>
-            </div>
+            </SingleElementContext.Provider>
             <Modal
                 show={showModal}
                 closeModal={handleClose}
