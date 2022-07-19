@@ -101,7 +101,14 @@ export const deleteGroup = (groupId: number) => {
 
 export const checkIfStudentInGroup = (groupId: number, studentId: number) => {
     return axios.get(
-        `http://localhost:8080/api/group/check_group_user/${groupId}/${studentId}`,
+        `http://localhost:8080/api/group/check_group_student/${groupId}/${studentId}`,
+        jwtConfig()
+    );
+}
+
+export const checkIfIsInstructorGroup = (groupId: number, instructorId: number) => {
+    return axios.get(
+        `http://localhost:8080/api/group/check_group_instructor/${groupId}/${instructorId}`,
         jwtConfig()
     );
 }

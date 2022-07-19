@@ -12,7 +12,7 @@ import OperationRegisterToGroup from "./OperationRegisterToGroup/OperationRegist
 import OperationUnregisterFromGroup from "./OperationUnregisterFromGroup/OperationUnregisterFromGroup";
 import { useAppSelector } from "../../../../app/hook/store.hook";
 import { selectAuth } from "../../../../app/store/auth/authSlice";
-import { checkIfStudentInGroup } from "../../../../app/api/group.api";
+import { checkIfIsInstructorGroup, checkIfStudentInGroup } from "../../../../app/api/group.api";
 
 const GroupOperations = (group: Group) => {
     const Operations = (props: {
@@ -23,9 +23,11 @@ const GroupOperations = (group: Group) => {
         const { user, role } = useAppSelector(selectAuth);
 
         const [studentInGroup, setStudentInGroup] = useState(false);
+        const [isInstructorGroup, setIsInstructorGroup] = useState(false);
 
         useEffect(() => {
             setStudentInGroup(false);
+            setIsInstructorGroup(false);
             if (role && (+UserRole[role] === +UserRole.STUDENT)) {
                 checkIfStudentInGroup(group.id, user.student?.id ? user.student.id : -1)
                     .then(data => {
@@ -36,11 +38,26 @@ const GroupOperations = (group: Group) => {
                         }
                     })
                     .catch(err => {
-                        console.log("err")
                         setStudentInGroup(false);
                     })
             }
-        }, [role, group.id, user.student?.id])
+            if (role && (+UserRole[role] === +UserRole.INSTRUCTOR)) {
+                checkIfIsInstructorGroup(group.id, user.employee?.id ? user.employee.id : -1)
+                    .then(data => {
+                        if (data.data) {
+                            setIsInstructorGroup(true);
+                        } else {
+                            setIsInstructorGroup(false);
+                        }
+                    })
+                    .catch(err => {
+                        setIsInstructorGroup(false);
+                    })
+            }
+            if (role && (+UserRole[role] === +UserRole.DIRECTOR)) {
+                setIsInstructorGroup(true);
+            }
+        }, [role, group.id, user])
 
         const handleShowRegisterToGroup = () => {
             props.openModal(
@@ -116,29 +133,36 @@ const GroupOperations = (group: Group) => {
                             name="Register"
                         />
                 }
-                <div className="link-wrapper">
-                    <ProtectedLink to={`/group/edit/${group.id}`} name="Edit group" auths={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]} />
-                </div>
-                <ProtectedOperation
-                    roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
-                    onClick={handleShowUpdateLevel}
-                    name="Edit level"
-                />
-                <ProtectedOperation
-                    roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
-                    onClick={handleShowUpdateStatus}
-                    name="Edit status"
-                />
-                <ProtectedOperation
-                    roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
-                    onClick={handleShowUpdateInstructors}
-                    name="Edit instructors"
-                />
-                <ProtectedOperation
-                    roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
-                    onClick={handleShowDeleteGroup}
-                    name="Delete group"
-                />
+                {
+                    isInstructorGroup ?
+                        <>
+                            <div className="link-wrapper">
+                                <ProtectedLink to={`/group/edit/${group.id}`} name="Edit group" auths={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]} />
+                            </div>
+                            <ProtectedOperation
+                                roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
+                                onClick={handleShowUpdateLevel}
+                                name="Edit level"
+                            />
+                            <ProtectedOperation
+                                roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
+                                onClick={handleShowUpdateStatus}
+                                name="Edit status"
+                            />
+                            <ProtectedOperation
+                                roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
+                                onClick={handleShowUpdateInstructors}
+                                name="Edit instructors"
+                            />
+                            <ProtectedOperation
+                                roles={[UserRole.DIRECTOR, UserRole.INSTRUCTOR]}
+                                onClick={handleShowDeleteGroup}
+                                name="Delete group"
+                            />
+                        </>
+                        :
+                        null
+                }
             </>
         );
     }

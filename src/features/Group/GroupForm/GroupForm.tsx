@@ -468,7 +468,7 @@ export default function GroupForm(props: { type: string }) {
                     {
                         formData.type.value === CHOREO ?
                             <>
-                                <label htmlFor='name'>NAZWA <span>*</span></label>
+                                <label htmlFor='name'>Name <span>*</span></label>
                                 <input id="name" name="name" value={formData.name.value} onChange={handleChange}></input>
                                 <span className="error">{formData.name.error}</span>
                             </>
