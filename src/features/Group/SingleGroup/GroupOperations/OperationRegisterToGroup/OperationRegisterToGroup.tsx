@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ModalContext } from '../../../../../App';
 import { registerStudentToGroup } from '../../../../../app/api/group.api';
 import { useAppSelector } from '../../../../../app/hook/store.hook';
 import { selectAuth } from '../../../../../app/store/auth/authSlice';
@@ -11,6 +12,7 @@ export default function OperationRegisterToGroup(props: {
     const { groupId } = props;
     const navigate = useNavigate();
     const { user } = useAppSelector(selectAuth);
+    const { setValue } = useContext(ModalContext);
 
     const [error, setError] = useState("");
 
@@ -19,12 +21,13 @@ export default function OperationRegisterToGroup(props: {
             .then(data => {
                 if (data.data.status === 200) {
                     navigate(`/group/${groupId}`);
+                    setValue("Registered successfully");
                 }
                 if (data.data.status === 502) {
-                    setError("Cannot register to group, level");
+                    setError("Cannot register to group, insufficient level");
                 }
                 if (data.data.status === 501) {
-                    setError("Cannot register to group, gender");
+                    setError("Cannot register to group, gender don't match");
                 }
                 if (data.data.status === 500) {
                     setError("Cannot register to group");
