@@ -264,13 +264,8 @@ export default function GroupForm(props: { type: string }) {
                 if (formData.type.value === COURSE) {
                     addGroupCourse(group)
                         .then(data => {
-                            if (data.data.status === 200) {
-                                navigate("/group");
-                                setValue("Group was added");
-                            }
-                            if (data.data.status === 500) {
-                                setMessage("Error cannot add group");
-                            }
+                            navigate("/group");
+                            setValue("Group was added");
                         })
                         .catch(err => {
                             setMessage("Error cannot add group");
@@ -307,13 +302,8 @@ export default function GroupForm(props: { type: string }) {
                 if (formData.type.value === COURSE) {
                     updateGroupCourse(+id, group)
                         .then(data => {
-                            if (data.data.status === 200) {
-                                navigate(`/group/${id}`);
-                                setValue("Group was updated");
-                            }
-                            if (data.data.status === 500) {
-                                setMessage("Error cannot update group");
-                            }
+                            navigate(`/group/${id}`);
+                            setValue("Group was updated");
                         })
                         .catch(err => {
                             setMessage("Error cannot update group");

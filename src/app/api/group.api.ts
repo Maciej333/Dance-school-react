@@ -98,3 +98,26 @@ export const deleteGroup = (groupId: number) => {
         jwtConfig()
     );
 }
+
+export const checkIfStudentInGroup = (groupId: number, studentId: number) => {
+    return axios.get(
+        `http://localhost:8080/api/group/check_group_user/${groupId}/${studentId}`,
+        jwtConfig()
+    );
+}
+
+export const registerStudentToGroup = (groupId: number, studentId: number) => {
+    return axios.put(
+        `http://localhost:8080/api/student/group/${groupId}`,
+        studentId,
+        jwtContentConfig()
+    );
+}
+
+export const unregisterStudentFromGroup = (groupId: number, studentId: number) => {
+    return axios.put(
+        `http://localhost:8080/api/student/remove_from_group/${groupId}`,
+        studentId,
+        jwtContentConfig()
+    );
+}

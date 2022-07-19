@@ -9,7 +9,7 @@ export default function SingleElement(props: {
     Operations: React.ComponentType<{
         openModal: (content: JSX.Element) => void | null;
         closeModal: () => void;
-    }>;
+    }> | null;
     toNavigate: string,
     children: JSX.Element;
 }) {
@@ -36,32 +36,36 @@ export default function SingleElement(props: {
     return (
         <>
             <div className="single-element">
-                {Operations ? (
-                    <div className="operations">
-                        <FontAwesomeIcon
-                            icon={faLeftLong}
-                            className="return-btn"
-                            onClick={handleReturn}
-                        />
-                        <div className="operations-btn-wrapper">
-                            <button
-                                className="btn operations-btn"
-                                onClick={() => setShow((prev) => !prev)}
-                            >
-                                Operations
-                            </button>
-                            <div
-                                className={`operations-list ${show ? "show" : ""
-                                    }`}
-                            >
-                                <Operations
-                                    openModal={handleOpen}
-                                    closeModal={handleClose}
-                                />
+                <div className="operations">
+                    <FontAwesomeIcon
+                        icon={faLeftLong}
+                        className="return-btn"
+                        onClick={handleReturn}
+                    />
+                    {
+                        Operations ? (
+                            <div className="operations-btn-wrapper">
+                                <button
+                                    className="btn operations-btn"
+                                    onClick={() => setShow((prev) => !prev)}
+                                >
+                                    Operations
+                                </button>
+                                <div
+                                    className={`operations-list ${show ? "show" : ""
+                                        }`}
+                                >
+                                    <Operations
+                                        openModal={handleOpen}
+                                        closeModal={handleClose}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                ) : null}
+                        )
+                            :
+                            null
+                    }
+                </div>
                 <div className="children">{children}</div>
             </div>
             <Modal
