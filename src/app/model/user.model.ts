@@ -4,6 +4,7 @@ import { Student } from "./student.model"
 
 export type User = {
     id: number,
+    login: string,
     firstname: string,
     lastname: string,
     roles: UserRole[],
@@ -13,6 +14,7 @@ export type User = {
 
 export const initUser: User = {
     id: -1,
+    login: '',
     firstname: '',
     lastname: '',
     roles: [],

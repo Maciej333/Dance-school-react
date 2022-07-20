@@ -36,3 +36,19 @@ export const addStudentToEmployee = (userId: number, student: { gender: number, 
         jwtContentConfig()
     )
 }
+
+export const updateStudent = (userId: number, student: Object) => {
+    return axios.put(
+        `http://localhost:8080/api/user/update_student/${userId}`,
+        student,
+        jwtContentConfig()
+    )
+}
+
+export const updateEmployee = (userId: number, employee: Object) => {
+    return axios.put(
+        `http://localhost:8080/api/user/update_employee/${userId}`,
+        employee,
+        jwtContentConfig()
+    )
+}
