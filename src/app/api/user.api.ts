@@ -1,5 +1,5 @@
-import axios from "axios"
-import { jwtConfig, jwtContentConfig } from "./configs"
+import axios from "axios";
+import { jwtConfig, jwtContentConfig } from "./configs";
 
 export const getUser = (id: number) => {
     return axios.get(
@@ -25,6 +25,14 @@ export const changePassword = (userId: number, password: string) => {
     return axios.put(
         `http://localhost:8080/api/user/change_password/${userId}`,
         password,
+        jwtContentConfig()
+    )
+}
+
+export const addStudentToEmployee = (userId: number, student: { gender: number, email: string | null, discount: number }) => {
+    return axios.put(
+        `http://localhost:8080/api/user/add_student/${userId}`,
+        student,
         jwtContentConfig()
     )
 }
